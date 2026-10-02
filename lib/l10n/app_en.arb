@@ -1,0 +1,925 @@
+{
+  "@@locale": "en",
+  "navHome": "Home",
+  "navExplore": "Explore",
+  "navCommunity": "Community",
+  "navActivity": "Activity",
+  "navProfile": "Profile",
+  "onboardingGetStarted": "Get started",
+  "onboardingContinue": "Continue",
+  "onboardingEnterHome": "Enter home",
+  "onboardingChooseLanguageTitle": "Choose your language",
+  "onboardingChooseLanguageSubtitle": "You can change this anytime in settings.",
+  "onboardingEquipmentTitle": "Where will you train?",
+  "onboardingEquipmentSubtitle": "Pick one or more places — we'll tailor exercises to your gear.",
+  "equipmentNoEquipment": "No equipment",
+  "equipmentNoEquipmentDesc": "Bodyweight workouts, anywhere",
+  "equipmentNoEquipmentDetail": "Train with just your body — push-ups, squats, planks, and core work. Ideal for travel, parks, or zero-gear days.",
+  "equipmentNoEquipmentHighlight1": "Bodyweight only",
+  "equipmentNoEquipmentHighlight2": "Train anywhere",
+  "equipmentNoEquipmentHighlight3": "No gear needed",
+  "equipmentHome": "Home",
+  "equipmentHomeDesc": "Dumbbells, bands, or home equipment",
+  "equipmentHomeDetail": "Use dumbbells, bands, or whatever you keep at home. We'll skip gym machines and cables so every move fits your space.",
+  "equipmentHomeHighlight1": "Dumbbells",
+  "equipmentHomeHighlight2": "Bands",
+  "equipmentHomeHighlight3": "Home gear",
+  "equipmentGym": "Gym",
+  "equipmentGymDesc": "Machines, barbells, cables, and full equipment",
+  "equipmentGymDetail": "Full access to machines, barbells, cables, and racks. Get complete strength plans built for a real gym floor.",
+  "equipmentGymHighlight1": "Machines",
+  "equipmentGymHighlight2": "Barbells",
+  "equipmentGymHighlight3": "Cables",
+  "settingsTrainingEnvironment": "Training environment",
+  "onboardingWelcomeHeadline": "Welcome to",
+  "onboardingWelcomeAccent": "PrimeGym",
+  "onboardingWelcomeBody": "Train smarter, eat better, and grow with community across Addis.",
+  "languageEnglish": "English",
+  "languageAmharic": "አማርኛ (Amharic)",
+  "languageAfaanOromoo": "Afaan Oromoo",
+  "goalBuildMuscle": "Build muscle",
+  "goalLoseFat": "Lose fat",
+  "goalGainWeight": "Gain weight",
+  "goalMaintain": "Maintain",
+  "goalImproveStrength": "Improve strength",
+  "goalImproveFitness": "Improve fitness",
+  "goalImproveEndurance": "Improve endurance",
+  "goalGeneralHealth": "General health",
+  "levelBeginner": "Beginner",
+  "levelIntermediate": "Intermediate",
+  "levelAdvanced": "Advanced",
+  "onboardingPlanTitle": "You're ready to train",
+  "onboardingPlanSubtitle": "Here's your personalized PrimeGym setup.",
+  "greetingMorning": "Good morning",
+  "greetingAfternoon": "Good afternoon",
+  "greetingEvening": "Good evening",
+  "greetingWithName": "{greeting}, {name} 👋",
+  "@greetingWithName": {
+    "placeholders": {
+      "greeting": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dayStreak": "{count}-day streak",
+  "@dayStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionToday": "Today",
+  "workoutProgressZeroOfOne": "0 of 1 workout",
+  "startWorkout": "Start workout",
+  "sectionQuickActions": "Quick actions",
+  "quickActionWorkout": "Workout",
+  "quickActionFindGym": "Find gym",
+  "quickActionCheckIn": "Check in",
+  "exploreWorkouts": "Explore workouts",
+  "savedWorkouts": "Saved workouts",
+  "popularWorkouts": "Popular workouts",
+  "filterTargetMuscle": "Target muscle",
+  "filterAvailableEquipment": "Available equipment",
+  "equipmentBodyweight": "Bodyweight",
+  "equipmentDumbbells": "Dumbbells",
+  "equipmentBarbell": "Barbell",
+  "equipmentCable": "Cable",
+  "noWorkoutsMatchFilters": "No workouts match these filters.",
+  "namedMuscleWorkout": "{name} {muscles} workout",
+  "@namedMuscleWorkout": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "muscles": { "type": "String" }
+    }
+  },
+  "workoutDurationExercises": "{minutes} min · {exercises}",
+  "@workoutDurationExercises": {
+    "placeholders": {
+      "minutes": { "type": "int" },
+      "exercises": { "type": "String" }
+    }
+  },
+  "sectionYourFriends": "Your friends",
+  "actionSeeCommunity": "See community",
+  "sectionThisWeek": "This week",
+  "weekStatWorkout": "Workouts",
+  "labelStreak": "Streak",
+  "streakDays": "{count} days",
+  "@streakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionNearYou": "Near you",
+  "nearYouGyms": "Gyms",
+  "nearYouEvents": "Events",
+  "exploreTitle": "Explore",
+  "searchDemoOnlyForNow": "Search is demo-only for now",
+  "exploreSearchHint": "Search gyms, workouts…",
+  "sectionNearby": "Nearby",
+  "categoryGyms": "Gyms",
+  "categoryTrainers": "Trainers",
+  "categoryEvents": "Events",
+  "categoryShop": "Shop",
+  "categoryChallenges": "Challenges",
+  "categoryCommunities": "Communities",
+  "sectionShop": "Shop",
+  "shopSeeAll": "See all",
+  "order": "Order",
+  "orderPlacedDemo": "Order placed for {product} (demo)",
+  "@orderPlacedDemo": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
+  "shopHeadlineProtein": "{name}, we picked the best protein for you",
+  "@shopHeadlineProtein": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "shopHeadlineDelivery": "Free delivery to {area}",
+  "@shopHeadlineDelivery": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "shopHeadlineNoEquipment": "Train at home — all-in-one kit for you",
+  "shopPriceEtb": "{price} ETB",
+  "@shopPriceEtb": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "shopDiscountPercent": "-{percent}%",
+  "@shopDiscountPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "shopFreeDeliveryTo": "Free delivery to {area}",
+  "@shopFreeDeliveryTo": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "shopDeliverTo": "Deliver to {area}",
+  "@shopDeliverTo": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "shopForYouBadge": "For you",
+  "checkoutTitle": "Checkout",
+  "checkoutPayWithTelebirr": "Telebirr",
+  "checkoutPayingTelebirr": "Opening…",
+  "checkoutPayManually": "Manual",
+  "checkoutManualTitle": "Manual payment",
+  "checkoutManualIntro": "Follow these steps, then confirm once you’ve paid.",
+  "checkoutManualStep1": "Open your Telebirr or bank app",
+  "checkoutManualStep2": "Send {amount} to PrimeGym Merchant (1000 2345 6789)",
+  "@checkoutManualStep2": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutManualStep3": "Use your order note: PG-{code}",
+  "@checkoutManualStep3": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutManualStep4": "Keep the SMS receipt until delivery",
+  "checkoutManualConfirm": "I’ve paid",
+  "checkoutPoweredByChapa": "Secure checkout via Chapa (demo)",
+  "checkoutDeliverTo": "Deliver to {area}",
+  "@checkoutDeliverTo": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutProductMissing": "Product not found",
+  "checkoutIncludes": "What’s included",
+  "checkoutFreeDeliveryBadge": "Free delivery",
+  "checkoutSecurePay": "Secure payment",
+  "myOrders": "My orders",
+  "trackOrder": "Track order",
+  "ordersEmptyTitle": "No orders yet",
+  "ordersEmptyBody": "Order something from the shop and track it here.",
+  "browseShop": "Browse shop",
+  "orderDetailTitle": "Order",
+  "orderChapaRef": "Chapa ref · {ref}",
+  "@orderChapaRef": {
+    "placeholders": {
+      "ref": {
+        "type": "String"
+      }
+    }
+  },
+  "orderContactPhone": "Contact · {phone}",
+  "@orderContactPhone": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "orderStatusPaymentInitiated": "Payment initiated",
+  "orderStatusPaid": "Paid",
+  "orderStatusPreparing": "Preparing",
+  "orderStatusOutForDelivery": "Out for delivery",
+  "orderStatusDelivered": "Delivered",
+  "orderTrackingTitle": "Tracking",
+  "paymentSuccessTitle": "Payment successful",
+  "paymentSuccessBody": "Your order is confirmed. You can track delivery anytime.",
+  "sectionPopularExercises": "Popular exercises",
+  "sectionRecommendedWorkouts": "Recommended workouts",
+  "workoutDurationLevel": "{minutes} min · {level}",
+  "@workoutDurationLevel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionTrendingInAddis": "Trending in Addis",
+  "checkedInTodayCount": "{rating} ★ · {count} checked in today",
+  "@checkedInTodayCount": {
+    "placeholders": {
+      "rating": {
+        "type": "num"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trainersTitle": "Trainers",
+  "searchDemoOnly": "Search is demo-only",
+  "searchTrainersHint": "Search trainers…",
+  "trainerPricePerSession": "{rating} ★ · {price} / session",
+  "@trainerPricePerSession": {
+    "placeholders": {
+      "rating": {
+        "type": "num"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "trainerDetailTitle": "Trainer",
+  "follow": "Follow",
+  "followingDemo": "Following {name} (demo)",
+  "@followingDemo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "statRating": "Rating",
+  "statYears": "Years",
+  "statSession": "Session",
+  "sectionPrograms": "Programs",
+  "bookDemo": "Book (demo)",
+  "bookingDemoOnly": "Booking is demo-only",
+  "eventsTitle": "Events",
+  "eventAttendingMeta": "{time} · {count} attending",
+  "@eventAttendingMeta": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "eventDetailTitle": "Event",
+  "attendingCount": "{count} attending",
+  "@attendingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionAbout": "About",
+  "joinEventDemo": "Join event (demo)",
+  "joinedEventDemo": "Joined event (demo)",
+  "challengesTitle": "Challenges",
+  "noChallengesInFilter": "No challenges in this filter",
+  "challengeProgressMeta": "{progress}/{goal} · {days} days left · {participants} people",
+  "@challengeProgressMeta": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      },
+      "participants": {
+        "type": "int"
+      }
+    }
+  },
+  "addedToFavoritesDemo": "Added to favorites (demo)",
+  "equipmentLabel": "Equipment: {equipment}",
+  "@equipmentLabel": {
+    "placeholders": {
+      "equipment": {
+        "type": "String"
+      }
+    }
+  },
+  "secondaryMusclesLabel": "Secondary: {muscles}",
+  "@secondaryMusclesLabel": {
+    "placeholders": {
+      "muscles": {
+        "type": "String"
+      }
+    }
+  },
+  "instructionsTitle": "Instructions",
+  "commonMistakesTitle": "Common mistakes",
+  "exerciseVideoTitle": "Video",
+  "addToWorkout": "Add to workout",
+  "addedToWorkoutDemo": "Added to workout (demo)",
+  "gymsNearYou": "Gyms near you",
+  "distanceKm": "{distance} km",
+  "@distanceKm": {
+    "placeholders": {
+      "distance": {
+        "type": "num"
+      }
+    }
+  },
+  "gymOpenUntilRating": "{rating} ★ · Open until {time}",
+  "@gymOpenUntilRating": {
+    "placeholders": {
+      "rating": {
+        "type": "num"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "peopleCheckedInToday": "{count} people checked in today",
+  "@peopleCheckedInToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "gymDistanceAway": "{rating} ★ · {distance} km away",
+  "@gymDistanceAway": {
+    "placeholders": {
+      "rating": {
+        "type": "num"
+      },
+      "distance": {
+        "type": "num"
+      }
+    }
+  },
+  "sectionInformation": "Information",
+  "infoHours": "Hours",
+  "openUntil": "Open until {time}",
+  "@openUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "infoMembership": "Membership",
+  "infoLocation": "Location",
+  "infoAmenities": "Amenities",
+  "sectionCommunity": "Community",
+  "gymCommunitySuffix": "{name} community",
+  "@gymCommunitySuffix": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "membersCount": "{count} members",
+  "@membersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeThisWeek": "{count} active this week",
+  "@activeThisWeek": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "septemberChallenge": "September challenge",
+  "joinCommunity": "Join community",
+  "joinedCommunityDemo": "Joined community (demo)",
+  "checkIn": "Check in",
+  "checkedIn": "Checked in",
+  "checkInXpPeople": "+25 XP · {count} people here",
+  "@checkInXpPeople": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "done": "Done",
+  "startWorkoutTitle": "Start workout",
+  "todaysSuggestion": "Today's suggestion",
+  "recommendedForYou": "Recommended for you",
+  "exercisesCount": "{count} exercises",
+  "@exercisesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "startTodaysPlan": "Start today's plan",
+  "orTrainSomethingElse": "Or train something else",
+  "noWorkoutsForFilter": "No workouts for this filter",
+  "basedOnYou": "Based on you",
+  "workoutDurationMuscles": "{minutes} min · {muscles}",
+  "@workoutDurationMuscles": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "muscles": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutTitle": "Workout",
+  "durationMinutes": "{minutes} min",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesCountCapitalized": "{count} Exercises",
+  "@exercisesCountCapitalized": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "setsTimesReps": "{sets} × {reps}",
+  "@setsTimesReps": {
+    "placeholders": {
+      "sets": {
+        "type": "int"
+      },
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "setsTimesRepsWithWeight": "{sets} × {reps} · {weight}",
+  "@setsTimesRepsWithWeight": {
+    "placeholders": {
+      "sets": {
+        "type": "int"
+      },
+      "reps": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "suggestMoreLikeThis": "Suggest more like this",
+  "showThisLess": "Show this less",
+  "exerciseProgress": "Exercise {current} of {total}",
+  "@exerciseProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "finish": "Finish",
+  "skipExercise": "Skip exercise",
+  "whyDidYouSkip": "Why did you skip?",
+  "skipFeedback": "Skip",
+  "skipReasonTooHard": "Too hard",
+  "skipReasonNoEquipment": "No equipment",
+  "skipReasonInjured": "Injured / pain",
+  "skipReasonDidntLike": "Didn't like it",
+  "skipReasonOther": "Other",
+  "setProgress": "Set {current} of {total}",
+  "@setProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "weightTimesReps": "{weight} × {reps}",
+  "@weightTimesReps": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "previousSet": "Previous: {weight} × {reps}",
+  "@previousSet": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "weightKg": "{weight} kg",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "num"
+      }
+    }
+  },
+  "labelWeight": "Weight",
+  "labelReps": "Reps",
+  "nice": "Nice!",
+  "completeSet": "Complete set",
+  "workoutComplete": "Workout complete!",
+  "minutesCount": "{minutes} minutes",
+  "@minutesCount": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesAndSets": "{exercises} exercises · {sets} sets",
+  "@exercisesAndSets": {
+    "placeholders": {
+      "exercises": {
+        "type": "int"
+      },
+      "sets": {
+        "type": "int"
+      }
+    }
+  },
+  "xpGain": "+{xp} XP",
+  "@xpGain": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "streakMaintained": "{days}-day streak maintained",
+  "@streakMaintained": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "personalizationUpdatedDemo": "Personalization updated (demo)",
+  "share": "Share",
+  "sharedToCommunityDemo": "Shared to community (demo)",
+  "wizardSwipeBackHint": "Swipe right anytime to go back",
+  "wizardSwipeBothHint": "Swipe left to continue · right to go back",
+  "wizardSwipeBackOnlyHint": "Swipe right to go back",
+  "viewDetails": "View details",
+  "savedAsPrivateProgress": "Saved as private progress",
+  "progressPostedToFeed": "Progress posted to feed",
+  "communityTitle": "Community",
+  "postProgress": "Post progress",
+  "activeChallenges": "Active challenges",
+  "challengeDaysLeftShort": "{progress}/{goal} · {days}d left",
+  "@challengeDaysLeftShort": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionFeed": "Feed",
+  "privateBadge": "Private",
+  "cheer": "Cheer",
+  "weightKgLabel": "{weight} kg",
+  "@weightKgLabel": {
+    "placeholders": {
+      "weight": {
+        "type": "num"
+      }
+    }
+  },
+  "challengeTitle": "Challenge",
+  "daysLeft": "{days} days left",
+  "@daysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "participantsCount": "{count} participants",
+  "@participantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "viewLeaderboardDemo": "View leaderboard (demo)",
+  "leaderboardDemoOnly": "Leaderboard is demo-only",
+  "emotionFiredUp": "Fired up",
+  "emotionStrong": "Strong",
+  "emotionHappy": "Happy",
+  "emotionCalm": "Calm",
+  "emotionDetermined": "Determined",
+  "emotionProud": "Proud",
+  "pickHowYouFeel": "Pick how you feel",
+  "enterValidWeightKg": "Enter a valid weight in kg",
+  "feelingEmotionToday": "Feeling {emotion} today",
+  "@feelingEmotionToday": {
+    "placeholders": {
+      "emotion": {
+        "type": "String"
+      }
+    }
+  },
+  "feedTypeProgress": "Progress",
+  "justNow": "Just now",
+  "postProgressTitle": "Post progress",
+  "photoSection": "Photo",
+  "tapToChangePhotoDemo": "Tap to change photo (demo)",
+  "howDoYouFeel": "How do you feel?",
+  "weightOptional": "Weight (optional)",
+  "weightHint": "e.g. 72.5",
+  "unitKg": "kg",
+  "captionOptional": "Caption (optional)",
+  "captionHint": "Share a note about your session…",
+  "makePrivate": "Make private",
+  "privateOnlyYou": "Only you can see this",
+  "visibleOnFeed": "Visible on your community feed",
+  "postPrivately": "Post privately",
+  "visibilityLabel": "Who can see this",
+  "visibilityPrivate": "Private",
+  "visibilityFriends": "Friends",
+  "visibilityPublic": "Public",
+  "visibilityPrivateHint": "Only you can see this",
+  "visibilityFriendsHint": "Visible to your friends",
+  "visibilityPublicHint": "Visible on the community feed",
+  "friendsOnlyBadge": "Friends",
+  "publicBadge": "Public",
+  "savedAsFriendsProgress": "Shared with friends",
+  "sectionFriendsProgress": "Friends' progress",
+  "mediaTypeLabel": "Media",
+  "mediaPhoto": "Photo",
+  "mediaVideo": "Video",
+  "videoSection": "Video",
+  "tapToChangeVideoDemo": "Tap to change video (demo)",
+  "upvote": "Upvote",
+  "howToDoThis": "How to",
+  "formTipsTitle": "Form tips",
+  "progressDetailTitle": "Progress",
+  "progressNotFound": "This progress post isn't available",
+  "friendProfile": "Profile",
+  "friendTabProgress": "Progress",
+  "friendTabWorkouts": "Workouts",
+  "friendProgress": "Progress",
+  "friendExercises": "Exercises",
+  "friendWorkoutTimeline": "Workout timeline",
+  "friendWorkoutSection": "Workout",
+  "friendStatPosts": "Posts",
+  "friendStatWorkouts": "Workouts",
+  "friendStatStreak": "Streak",
+  "friendInbox": "Inbox",
+  "friendInboxComingSoon": "Messaging with friends is coming soon",
+  "friendFollow": "Follow",
+  "friendFollowing": "Following",
+  "friendMessage": "Message",
+  "friendShareProfile": "Share profile",
+  "friendCopyLink": "Copy link",
+  "friendLinkCopied": "Link copied",
+  "friendStatFollowing": "Following",
+  "friendStatFollowers": "Followers",
+  "friendStatUpvotes": "Upvotes",
+  "friendWorkoutExercises": "{count} exercises",
+  "@friendWorkoutExercises": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "friendWorkoutSets": "{count} sets",
+  "@friendWorkoutSets": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "friendWorkoutVolume": "{kg} kg volume",
+  "@friendWorkoutVolume": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
+  "friendWorkoutVolumeShort": "{kg} kg",
+  "@friendWorkoutVolumeShort": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
+  "seeMore": "See more",
+  "saveForLater": "Save for later",
+  "savedForLater": "Saved",
+  "savedForLaterSnack": "Workout saved for later",
+  "removeFromSaved": "Remove from saved",
+  "removedFromSavedSnack": "Removed from saved",
+  "saveWorkout": "Save",
+  "unsaveWorkout": "Unsave",
+  "noFriendWorkoutsYet": "No workouts logged yet",
+  "workoutSetsRepsWeight": "{sets}×{reps} @ {weight} kg",
+  "@workoutSetsRepsWeight": {
+    "placeholders": {
+      "sets": {
+        "type": "int"
+      },
+      "reps": {
+        "type": "int"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "friendNotFound": "Friend not found",
+  "noFriendProgressYet": "No visible progress yet",
+  "viewLeaderboard": "View leaderboard",
+  "leaderboardTitle": "Leaderboard",
+  "youLabel": "You",
+  "sectionComingLater": "Coming later",
+  "comingLaterHint": "Trainers, gyms, and events — soon",
+  "sectionTrain": "Train",
+  "rankUpSnack": "You're #{rank} on the board!",
+  "@rankUpSnack": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "activityTitle": "Activity",
+  "levelLabel": "Level {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "dayStreakShort": "{count}-day streak",
+  "@dayStreakShort": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "xpProgress": "{xp} / {xpToNext} XP",
+  "@xpProgress": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "xpToNext": {
+        "type": "int"
+      }
+    }
+  },
+  "statWorkouts": "Workouts",
+  "statMinutes": "Minutes",
+  "statXp": "XP",
+  "sectionRecent": "Recent",
+  "profileTitle": "Profile",
+  "profileLevelIntermediate": "Level {level} · Intermediate",
+  "@profileLevelIntermediate": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "locationStreakDays": "Addis Ababa · {days}-day streak",
+  "@locationStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "goalsTitle": "Goals",
+  "settingsLanguage": "Language",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsOn": "On",
+  "settingsPrivacy": "Privacy",
+  "settingsPrivacySubtitle": "Manage who sees your progress",
+  "settingsSubscription": "Subscription",
+  "settingsFreePlan": "Free plan",
+  "replayOnboardingDemo": "Replay onboarding (demo)",
+  "settingsDemoOnly": "{title} is demo-only",
+  "@settingsDemoOnly": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseLanguage": "Choose language",
+  "cancel": "Cancel",
+  "onboardingPlanTrainingTitle": "Personalized training",
+  "onboardingPlanTrainingBody": "Sessions built for {environment} — the right moves for your gear and space.",
+  "onboardingPlanCommunityTitle": "Community that keeps you going",
+  "onboardingPlanCommunityBody": "Follow friends, share progress, and stay accountable with lifters across Addis.",
+  "onboardingPlanTrainerTitle": "Online personal trainers",
+  "onboardingPlanTrainerBody": "Get coached remotely by vetted trainers who match your goals and schedule.",
+  "onboardingPlanReadyBadge": "Personalized for you",
+  "@onboardingPlanTrainingBody": {
+    "placeholders": {
+      "environment": {
+        "type": "String"
+      }
+    }
+  }
+}
