@@ -34,13 +34,6 @@ class ActivityScreen extends StatelessWidget {
                         l10n.levelLabel(MockData.level),
                         style: textTheme.headlineSmall,
                       ),
-                      const Spacer(),
-                      Text(
-                        '🔥 ${l10n.dayStreakShort(MockData.streakDays)}',
-                        style: textTheme.titleSmall?.copyWith(
-                          color: AppColors.accent,
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 16),

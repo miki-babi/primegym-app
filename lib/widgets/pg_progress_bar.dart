@@ -20,7 +20,7 @@ class PgProgressBar extends StatelessWidget {
         value: value.clamp(0.0, 1.0),
         minHeight: height,
         backgroundColor: AppColors.progressTrack,
-        color: AppColors.accent,
+        color: AppColors.progressFill,
       ),
     );
   }

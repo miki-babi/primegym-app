@@ -197,7 +197,7 @@ class GymDetailScreen extends StatelessWidget {
             icon: const Icon(
               Icons.qr_code_scanner_rounded,
               size: 18,
-              color: Color(0xFF1A1200),
+              color: AppColors.onAccent,
             ),
             onPressed: () => context.push('/gym/${gym.id}/check-in'),
           ),

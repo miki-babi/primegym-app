@@ -41,7 +41,7 @@ class MuscleFilterCard extends StatelessWidget {
               duration: const Duration(milliseconds: 180),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.background,
                 borderRadius: imageRadius,
                 border: Border.all(
                   color: selected ? Colors.transparent : AppColors.border,

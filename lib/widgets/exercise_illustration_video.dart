@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -10,6 +12,8 @@ class ExerciseIllustrationVideo extends StatefulWidget {
     super.key,
     required this.assetPath,
     required this.fallbackImageAsset,
+    this.isFile = false,
+    this.fallbackIsFile = false,
     this.width = 200,
     this.height = 148,
     this.borderRadius = 20,
@@ -18,6 +22,8 @@ class ExerciseIllustrationVideo extends StatefulWidget {
 
   final String? assetPath;
   final String fallbackImageAsset;
+  final bool isFile;
+  final bool fallbackIsFile;
   final double width;
   final double height;
   final double borderRadius;
@@ -70,7 +76,13 @@ class _ExerciseIllustrationVideoState extends State<ExerciseIllustrationVideo> {
       _loadedPath = path;
     });
 
-    final controller = VideoPlayerController.asset(path);
+    final pathValue = path;
+    final useFile = widget.isFile ||
+        (!pathValue.startsWith('assets/') &&
+            (pathValue.contains('/') || pathValue.contains('\\')));
+    final controller = useFile
+        ? VideoPlayerController.file(File(pathValue))
+        : VideoPlayerController.asset(pathValue);
     try {
       await controller.initialize();
       await controller.setLooping(true);
@@ -116,6 +128,7 @@ class _ExerciseIllustrationVideoState extends State<ExerciseIllustrationVideo> {
   Widget _fallback() {
     return ExerciseImage(
       assetPath: widget.fallbackImageAsset,
+      isFile: widget.fallbackIsFile,
       width: widget.width,
       height: widget.height,
       borderRadius: 0,
@@ -138,11 +151,26 @@ class _ExerciseIllustrationVideoState extends State<ExerciseIllustrationVideo> {
     );
   }
 
+  bool get _isGif {
+    final path = widget.assetPath;
+    if (path == null) return false;
+    final withoutQuery = path.split('?').first;
+    return withoutQuery.toLowerCase().endsWith('.gif');
+  }
+
   @override
   Widget build(BuildContext context) {
     final Widget content;
     if (_failed || widget.assetPath == null || widget.assetPath!.isEmpty) {
       content = _fallback();
+    } else if (_isGif) {
+      content = ExerciseImage(
+        assetPath: widget.assetPath!,
+        isFile: widget.isFile,
+        width: widget.width,
+        height: widget.height,
+        borderRadius: 0,
+      );
     } else {
       final size = _controller?.value.size;
       content = Stack(

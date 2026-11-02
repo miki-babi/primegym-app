@@ -31,15 +31,16 @@ class WorkoutDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final workout = MockData.workoutById(workoutId) ?? MockData.todaysWorkout;
     final textTheme = Theme.of(context).textTheme;
     final l10n = context.l10n;
     final locale = Localizations.localeOf(context);
-    final showMuscleScrollHint = workout.muscles.length > 3;
 
     return ListenableBuilder(
       listenable: AppStore.instance,
       builder: (context, _) {
+        final workout = AppStore.instance.workoutPlanById(workoutId) ??
+            MockData.todaysWorkout;
+        final showMuscleScrollHint = workout.muscles.length > 3;
         final saved = AppStore.instance.isWorkoutPlanSaved(workout.id);
 
         return Scaffold(
@@ -50,16 +51,17 @@ class WorkoutDetailScreen extends StatelessWidget {
             ),
             title: Text(l10n.workoutTitle),
             actions: [
-              IconButton(
-                tooltip: saved ? l10n.unsaveWorkout : l10n.saveWorkout,
-                onPressed: () => _toggleSave(context),
-                icon: Icon(
-                  saved
-                      ? Icons.bookmark_rounded
-                      : Icons.bookmark_border_rounded,
-                  color: saved ? AppColors.accent : AppColors.textSecondary,
+              if (!AppStore.instance.isCustomPlan(workoutId))
+                IconButton(
+                  tooltip: saved ? l10n.unsaveWorkout : l10n.saveWorkout,
+                  onPressed: () => _toggleSave(context),
+                  icon: Icon(
+                    saved
+                        ? Icons.bookmark_rounded
+                        : Icons.bookmark_border_rounded,
+                    color: saved ? AppColors.accent : AppColors.textSecondary,
+                  ),
                 ),
-              ),
             ],
           ),
           body: Column(
@@ -213,38 +215,15 @@ class WorkoutDetailScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: PgButton(
-                        label: saved ? l10n.unsaveWorkout : l10n.saveWorkout,
-                        variant: PgButtonVariant.secondary,
-                        icon: Icon(
-                          saved
-                              ? Icons.bookmark_remove_rounded
-                              : Icons.bookmark_add_rounded,
-                          size: 18,
-                          color: AppColors.accent,
-                        ),
-                        onPressed: () => _toggleSave(context),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      flex: 6,
-                      child: PgButton(
-                        label: l10n.startWorkout,
-                        icon: const Icon(
-                          Icons.play_arrow_rounded,
-                          size: 18,
-                          color: Color(0xFF1A1200),
-                        ),
-                        onPressed: () =>
-                            context.push('/workout/${workout.id}/active'),
-                      ),
-                    ),
-                  ],
+                child: PgButton(
+                  label: l10n.startWorkout,
+                  icon: const Icon(
+                    Icons.play_arrow_rounded,
+                    size: 18,
+                    color: AppColors.onAccent,
+                  ),
+                  onPressed: () =>
+                      context.push('/workout/${workout.id}/active'),
                 ),
               ),
             ],

@@ -53,8 +53,13 @@ class _ExploreWorkoutsScreenState extends State<ExploreWorkoutsScreen> {
   );
 
   List<WorkoutPlan> get _savedWorkouts {
-    final savedIds = AppStore.instance.savedWorkoutPlanIds;
-    return _filtered.where((w) => savedIds.contains(w.id)).toList();
+    final filteredIds = {for (final w in _filtered) w.id};
+    return [
+      for (final w in AppStore.instance.savedWorkoutPlans())
+        if (AppStore.instance.isCustomPlan(w.id) ||
+            filteredIds.contains(w.id))
+          w,
+    ];
   }
 
   List<WorkoutPlan> get _popularWorkouts {
@@ -421,33 +426,34 @@ class _WorkoutResultCard extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-            tooltip: AppStore.instance.isWorkoutPlanSaved(workout.id)
-                ? l10n.unsaveWorkout
-                : l10n.saveWorkout,
-            onPressed: () async {
-              final added = await AppStore.instance
-                  .toggleSavedWorkoutPlan(workout.id);
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    added
-                        ? l10n.savedForLaterSnack
-                        : l10n.removedFromSavedSnack,
+          if (!AppStore.instance.isCustomPlan(workout.id))
+            IconButton(
+              tooltip: AppStore.instance.isWorkoutPlanSaved(workout.id)
+                  ? l10n.unsaveWorkout
+                  : l10n.saveWorkout,
+              onPressed: () async {
+                final added = await AppStore.instance
+                    .toggleSavedWorkoutPlan(workout.id);
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      added
+                          ? l10n.savedForLaterSnack
+                          : l10n.removedFromSavedSnack,
+                    ),
                   ),
-                ),
-              );
-            },
-            icon: Icon(
-              AppStore.instance.isWorkoutPlanSaved(workout.id)
-                  ? Icons.bookmark_rounded
-                  : Icons.bookmark_border_rounded,
-              color: AppStore.instance.isWorkoutPlanSaved(workout.id)
-                  ? AppColors.accent
-                  : AppColors.textMuted,
+                );
+              },
+              icon: Icon(
+                AppStore.instance.isWorkoutPlanSaved(workout.id)
+                    ? Icons.bookmark_rounded
+                    : Icons.bookmark_border_rounded,
+                color: AppStore.instance.isWorkoutPlanSaved(workout.id)
+                    ? AppColors.accent
+                    : AppColors.textMuted,
+              ),
             ),
-          ),
         ],
       ),
     );

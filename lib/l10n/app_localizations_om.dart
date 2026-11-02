@@ -30,6 +30,12 @@ class AppLocalizationsOm extends AppLocalizations {
   String get onboardingContinue => 'Itti fufi';
 
   @override
+  String get onboardingNext => 'Itti aanee';
+
+  @override
+  String get onboardingSkip => 'Darbi';
+
+  @override
   String get onboardingEnterHome => 'Gara manaatti seeni';
 
   @override
@@ -526,7 +532,13 @@ class AppLocalizationsOm extends AppLocalizations {
   String get sectionPrograms => 'Sagantawwan';
 
   @override
-  String get bookDemo => 'Qabadhu (agarsiisa)';
+  String get sectionCertifications => 'Ragaalee';
+
+  @override
+  String get sectionTestimonials => 'Yaadota fayyadamtootaa';
+
+  @override
+  String get bookDemo => 'Qabadhu';
 
   @override
   String get bookingDemoOnly => 'Qabannaan agarsiisa qofa';
@@ -562,6 +574,22 @@ class AppLocalizationsOm extends AppLocalizations {
   @override
   String get noChallengesInFilter =>
       'Calallii kana keessatti qormaatni hin jiru';
+
+  @override
+  String get filterAll => 'Hundaa';
+
+  @override
+  String get filterInPerson => 'Mudhii';
+
+  @override
+  String get filterOnline => 'Onlaayinii';
+
+  @override
+  String get filterAllLocations => 'Bakka hundaa';
+
+  @override
+  String get noTrainersFound =>
+      'Calalaaleen kanan filatamni waliin walitti hinqabu';
 
   @override
   String challengeProgressMeta(
@@ -600,6 +628,41 @@ class AppLocalizationsOm extends AppLocalizations {
 
   @override
   String get addedToWorkoutDemo => 'Shaakalatti dabalamte (agarsiisa)';
+
+  @override
+  String get addToWorkoutTitle => 'Shaakalatti dabali';
+
+  @override
+  String get addToActiveWorkout => 'Shaakala ammaa';
+
+  @override
+  String addToActiveWorkoutSubtitle(String name) {
+    return 'Seshinii ammaa · $name';
+  }
+
+  @override
+  String get addToSavedWorkouts => 'Shaakala kuufame';
+
+  @override
+  String get addToWorkoutEmpty =>
+      'Seshinii ykn shaakala kuufame hin jiru. Dura jalqabi ykn kuusi.';
+
+  @override
+  String addedToNamedWorkout(String name) {
+    return 'Gara $name tti dabalame';
+  }
+
+  @override
+  String get newCollection => 'Kuusaa haaraa';
+
+  @override
+  String get newCollectionSubtitle => 'Kana dabaluuf shaakala uumi';
+
+  @override
+  String get collectionNameHint => 'Maqaa kuusaa';
+
+  @override
+  String get create => 'Uumi';
 
   @override
   String get gymsNearYou => 'Jiimota si dhihoo';
@@ -754,7 +817,10 @@ class AppLocalizationsOm extends AppLocalizations {
   String get finish => 'Xumuri';
 
   @override
-  String get skipExercise => 'Shaakala darbi';
+  String get resumeWorkout => 'Itti fufi';
+
+  @override
+  String get skipExercise => 'Darbi';
 
   @override
   String get whyDidYouSkip => 'Maaliif darbite?';
@@ -841,6 +907,37 @@ class AppLocalizationsOm extends AppLocalizations {
 
   @override
   String get sharedToCommunityDemo => 'Hawaasatti qoodame (agarsiisa)';
+
+  @override
+  String get shareWorkout => 'Shaakala qoodi';
+
+  @override
+  String get changeBackground => 'Duubbee jijjiiri';
+
+  @override
+  String get sharing => 'Qoodaa jira…';
+
+  @override
+  String get shareStatDuration => 'Yeroo';
+
+  @override
+  String get shareStatExercises => 'Shaakalota';
+
+  @override
+  String get shareStatSets => 'Seetii';
+
+  @override
+  String get shareStatVolume => 'Baay\'ina';
+
+  @override
+  String shareStatDurationValue(int minutes) {
+    return 'Daqiiqaa $minutes';
+  }
+
+  @override
+  String shareStatVolumeValue(String kg) {
+    return '$kg kg';
+  }
 
   @override
   String get wizardSwipeBackHint => 'Deebi\'uuf mirgaatti harkisi';
@@ -1297,4 +1394,295 @@ class AppLocalizationsOm extends AppLocalizations {
 
   @override
   String get onboardingPlanReadyBadge => 'Siif qophaa\'e';
+
+  @override
+  String get onboardingOffersTitle => 'Waan PrimeGym dhiheessu';
+
+  @override
+  String get onboardingOffersSubtitle =>
+      'Kaayyoo waliin leenjii gochuuf barbaachisu hunda.';
+
+  @override
+  String get onboardingOffersTrainingBody =>
+      'Leenjii kaayyoo, sagantaa fi meeshaalee keetiif mijatu.';
+
+  @override
+  String get onboardingNameTitle => 'Maqaan kee eenyu?';
+
+  @override
+  String get onboardingNameSubtitle =>
+      'Muuxannoo kee ofii keetti qopheessuuf kana fayyadamna.';
+
+  @override
+  String get onboardingNameHint => 'Maqaa kee';
+
+  @override
+  String get onboardingGoalTitle => 'Kaayyoonni kee maal?';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'Kan si ilaalu hunda filadhu — tokkoo ol filachuu dandeessa.';
+
+  @override
+  String get goalStrength => 'Jabaachuu';
+
+  @override
+  String get goalWeightLoss => 'Ulfaatina hir\'isu';
+
+  @override
+  String get goalMuscleGain => 'Maashaalee dabaluu';
+
+  @override
+  String get onboardingFrequencyTitle => 'Torbanitti yeroo meeqa leenjita?';
+
+  @override
+  String get onboardingFrequencySubtitle =>
+      'Dhugaa ta\'i — karoora itti fufuu dandeessu ijaarra.';
+
+  @override
+  String get frequencyOnce => 'Torbanitti al tokko';
+
+  @override
+  String get frequencyTwice => 'Torbanitti yeroo 2';
+
+  @override
+  String get frequencyThree => 'Torbanitti yeroo 3';
+
+  @override
+  String get frequencyFour => 'Torbanitti yeroo 4';
+
+  @override
+  String get frequencyFive => 'Torbanitti yeroo 5';
+
+  @override
+  String get frequencySix => 'Torbanitti yeroo 6';
+
+  @override
+  String get frequencyEveryday => 'Guyyaa guyyaa';
+
+  @override
+  String get onboardingExperienceTitle => 'Muuxannoon kee maal?';
+
+  @override
+  String get onboardingExperienceSubtitle =>
+      'Cimina sirrii mijeessuuf nu gargaara.';
+
+  @override
+  String get onboardingLocationTitle => 'Eessa leenjita?';
+
+  @override
+  String get onboardingLocationSubtitle => 'Seshinii bakka keetiif mijeessina.';
+
+  @override
+  String get locationOutdoor => 'Ala';
+
+  @override
+  String get locationOutdoorDetail =>
+      'Paarkii, karaa, ykn qilleensa — leenjii ulfaatina qaamaa.';
+
+  @override
+  String get onboardingEquipmentSelectTitle => 'Meeshaalee akkamii qabda?';
+
+  @override
+  String get onboardingEquipmentSelectSubtitle =>
+      'Fayyadamuu dandeessu hunda filadhu — booda jijjiiruu dandeessa.';
+
+  @override
+  String onboardingEquipmentSelectedCount(int count) {
+    return '$count filataman';
+  }
+
+  @override
+  String get equipmentCategoryFreeWeights => 'Ulfaatina bilisaa fi mormii';
+
+  @override
+  String get equipmentCategoryStructures => 'Caasaa jiimii fi beenchii';
+
+  @override
+  String get equipmentCategoryFunctional =>
+      'Meeshaalee sochii fi ulfaatina qaamaa';
+
+  @override
+  String get equipmentCategoryCardio => 'Meeshaalee kaardiyoo';
+
+  @override
+  String get equipmentCategoryCoreRecovery =>
+      'Kooree fi meeshaalee deebisanii fayyaa\'uu';
+
+  @override
+  String get equipmentResistanceBands => 'Baandii mormii';
+
+  @override
+  String get equipmentMachines => 'Maashinota';
+
+  @override
+  String get equipmentKettlebells => 'Keetilbeelota';
+
+  @override
+  String get equipmentEzCurlBar => 'EZ curl / baarota addaa';
+
+  @override
+  String get equipmentWeightBench => 'Beenchii ulfaatinaa';
+
+  @override
+  String get equipmentSquatRack => 'Raakii iskwaatii / power cage';
+
+  @override
+  String get equipmentPullUpBar => 'Baarii pull-up / dip station';
+
+  @override
+  String get equipmentCableMachine => 'Maashinii keebilii';
+
+  @override
+  String get equipmentSmithMachine => 'Maashinii Smith';
+
+  @override
+  String get equipmentTrx => 'TRX / suspension trainer';
+
+  @override
+  String get equipmentGymnasticRings => 'Ringoota jiimnaastikii';
+
+  @override
+  String get equipmentWeightVest => 'Veestii ulfaatinaa / ankle weights';
+
+  @override
+  String get equipmentPlyoBox => 'Saanduqa plyo';
+
+  @override
+  String get equipmentMedicineBall => 'Kubbaa medicine / slam';
+
+  @override
+  String get equipmentSandbag => 'Kirrii cirracha';
+
+  @override
+  String get equipmentTreadmill => 'Treedmiilii';
+
+  @override
+  String get equipmentBike => 'Saayikilii dhaabbataa / air / spin';
+
+  @override
+  String get equipmentRowingMachine => 'Maashinii rowing';
+
+  @override
+  String get equipmentSkiErg => 'SkiErg';
+
+  @override
+  String get equipmentStairmaster => 'Stairmaster';
+
+  @override
+  String get equipmentJumpRope => 'Funyoo utaalchaa';
+
+  @override
+  String get equipmentAbWheel => 'Ab wheel / core sliders';
+
+  @override
+  String get equipmentFoamRoller => 'Foam roller / meeshaalee sochii';
+
+  @override
+  String get equipmentYogaMat => 'Maatii yoga / leenjii';
+
+  @override
+  String get equipmentUseBodyweight =>
+      'Push-up, iskwaatii, lunge meeshaa malee';
+
+  @override
+  String get equipmentUseDumbbells => 'Liiftii tokkoo fi isolation';
+
+  @override
+  String get equipmentUseBarbell => 'Liiftii compound ulfaataa';
+
+  @override
+  String get equipmentUseKettlebells => 'Swing, clean, carry';
+
+  @override
+  String get equipmentUseResistanceBands =>
+      'Mormii jijjiiramaa, gargaarsa, rehab';
+
+  @override
+  String get equipmentUseEzCurlBar => 'Hojii harka, trap fi safety squat bars';
+
+  @override
+  String get equipmentUseWeightBench => 'Pressing fi liiftii deeggarsa qabu';
+
+  @override
+  String get equipmentUseSquatRack => 'Iskwaatii fi pressing nageenyaan';
+
+  @override
+  String get equipmentUsePullUpBar => 'Harkachuu fi dhiibuu ulfaatina qaamaa';
+
+  @override
+  String get equipmentUseMachines => 'Jabaa qajeelfame, joints-tiif mijataa';
+
+  @override
+  String get equipmentUseCableMachine => 'Tension dhaabbataa, kofa hedduu';
+
+  @override
+  String get equipmentUseSmithMachine => 'Baarbeelii rail dhaabbataa irratti';
+
+  @override
+  String get equipmentUseTrx => 'Mormii ulfaatina qaamaa strap waliin';
+
+  @override
+  String get equipmentUseGymnasticRings =>
+      'Harkachuu, dhiibuu, tasgabbi olaanaa';
+
+  @override
+  String get equipmentUseWeightVest => 'Ulfaatina sochii qaamaatti dabala';
+
+  @override
+  String get equipmentUsePlyoBox => 'Utaaluu fi step-up';
+
+  @override
+  String get equipmentUseMedicineBall => 'Darbuu, slam, humna naanna\'uu';
+
+  @override
+  String get equipmentUseSandbag => 'Carry, lift, conditioning';
+
+  @override
+  String get equipmentUseTreadmill => 'Deemuu fi fiiguu';
+
+  @override
+  String get equipmentUseBike => 'Kaardiyoo impact gadiaanaa fi interval';
+
+  @override
+  String get equipmentUseRowingMachine => 'Kaardiyoo qaama guutuu';
+
+  @override
+  String get equipmentUseSkiErg => 'Kaardiyoo qaama olii irratti hundaa\'e';
+
+  @override
+  String get equipmentUseStairmaster => 'Kaardiyoo sadarkaa olba\'uu';
+
+  @override
+  String get equipmentUseJumpRope => 'Kaardiyoo socho\'aa fi qindoomina';
+
+  @override
+  String get equipmentUseAbWheel => 'Tasgabbi kooree fi anti-extension';
+
+  @override
+  String get equipmentUseFoamRoller =>
+      'Hojii soft-tissue fi deebisanii fayyaa\'uu';
+
+  @override
+  String get equipmentUseYogaMat => 'Hojii floorii fi padding';
+
+  @override
+  String get onboardingGeneratingTitle => 'Karoora leenjii kee uumaa jira';
+
+  @override
+  String get onboardingGeneratingSubtitle =>
+      'Siif ijaarame karoora qindaa\'aa jira.';
+
+  @override
+  String get onboardingGeneratingStepGoal => 'Kaayyoo kee wajjin wal simsiisaa';
+
+  @override
+  String get onboardingGeneratingStepSchedule => 'Sagantaa kee mijeessaa';
+
+  @override
+  String get onboardingGeneratingStepEquipment =>
+      'Meeshaalee keetiif sochii filachaa';
+
+  @override
+  String get onboardingGeneratingStepReady => 'Karoorni kee qophaa\'eera';
 }

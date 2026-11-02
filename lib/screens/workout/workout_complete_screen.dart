@@ -1,11 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../data/active_workout_controller.dart';
+import '../../data/app_store.dart';
 import '../../data/exercise_preferences.dart';
+import '../../data/exercise_repository.dart';
 import '../../data/mock_data.dart';
 import '../../l10n/l10n_ext.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/pg_button.dart';
+import '../../widgets/workout_share_actions.dart';
+import '../../widgets/workout_share_card.dart';
+import '../../widgets/workout_share_exporter.dart';
+import '../../widgets/workout_share_stats.dart';
 
 class WorkoutCompleteScreen extends StatefulWidget {
   const WorkoutCompleteScreen({super.key, required this.workoutId});
@@ -16,12 +26,12 @@ class WorkoutCompleteScreen extends StatefulWidget {
   State<WorkoutCompleteScreen> createState() => _WorkoutCompleteScreenState();
 }
 
-class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _scale;
+class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   late bool _collectingSkipReasons;
   final Map<String, SkipReason> _draftReasons = {};
+  final GlobalKey _cardKey = GlobalKey();
+  File? _backgroundFile;
+  bool _sharing = false;
 
   @override
   void initState() {
@@ -31,20 +41,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen>
       final existing = ExercisePreferences.skipReasonFor(id);
       if (existing != null) _draftReasons[id] = existing;
     }
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 700),
-    );
-    _scale = CurvedAnimation(parent: _controller, curve: Curves.elasticOut);
-    if (!_collectingSkipReasons) {
-      _controller.forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   bool get _allReasonsSelected {
@@ -59,12 +55,33 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen>
     }
     ExercisePreferences.clearSessionSkips();
     setState(() => _collectingSkipReasons = false);
-    _controller.forward(from: 0);
   }
 
   void _goHome() {
     ExercisePreferences.clearSessionSkips();
     context.go('/home');
+  }
+
+  Future<void> _pickBackground() async {
+    final picked = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 92,
+    );
+    if (picked == null || !mounted) return;
+    setState(() => _backgroundFile = File(picked.path));
+  }
+
+  Future<void> _shareCard(String workoutTitle) async {
+    if (_sharing) return;
+    setState(() => _sharing = true);
+    try {
+      await exportAndShareWorkoutCard(
+        boundaryKey: _cardKey,
+        workoutTitle: workoutTitle,
+      );
+    } finally {
+      if (mounted) setState(() => _sharing = false);
+    }
   }
 
   String _reasonLabel(AppLocalizations l10n, SkipReason reason) {
@@ -109,7 +126,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen>
                   separatorBuilder: (_, _) => const SizedBox(height: 16),
                   itemBuilder: (context, index) {
                     final id = skippedIds[index];
-                    final exercise = MockData.exerciseById(id);
+                    final exercise = ExerciseRepository.instance.exerciseById(id);
                     final name = exercise?.name.resolve(locale) ?? id;
                     final selected = _draftReasons[id];
 
@@ -166,109 +183,69 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen>
 
   Widget _buildCelebration(BuildContext context) {
     final workout =
-        MockData.workoutById(widget.workoutId) ?? MockData.todaysWorkout;
-    final textTheme = Theme.of(context).textTheme;
+        AppStore.instance.workoutPlanById(widget.workoutId) ??
+            MockData.todaysWorkout;
     final l10n = context.l10n;
+    final locale = Localizations.localeOf(context);
+    final title = workout.title.resolve(locale);
+    final stats = buildWorkoutShareStats(
+      workout: workout,
+      l10n: l10n,
+      sessionWeightSum:
+          ActiveWorkoutController.instance.lastCompletedWeightSum,
+    );
 
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
-          child: Column(
-            children: [
-              const Spacer(),
-              ScaleTransition(
-                scale: _scale,
-                child: Container(
-                  width: 96,
-                  height: 96,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.accentSoft,
-                    border: Border.all(color: AppColors.accentMuted, width: 2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.accent.withValues(alpha: 0.35),
-                        blurRadius: 40,
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.celebration_rounded,
-                    color: AppColors.accent,
-                    size: 40,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 28),
-              Text(
-                l10n.workoutComplete,
-                textAlign: TextAlign.center,
-                style: textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 20),
-              Text(
-                l10n.minutesCount(workout.durationMinutes + 9),
-                style: textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                l10n.exercisesAndSets(workout.exercises.length, 23),
-                style: textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 28),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      l10n.xpGain(180),
-                      style: textTheme.headlineSmall?.copyWith(
-                        color: AppColors.accent,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      l10n.streakMaintained(MockData.streakDays),
-                      style: textTheme.bodyMedium,
-                    ),
-                    if (ExercisePreferences.hasAnyFeedback) ...[
-                      const SizedBox(height: 10),
-                      Text(
-                        l10n.personalizationUpdatedDemo,
-                        textAlign: TextAlign.center,
-                        style: textTheme.bodySmall?.copyWith(
-                          color: AppColors.accent,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              const Spacer(),
-              PgButton(
-                label: l10n.share,
-                variant: PgButtonVariant.secondary,
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(l10n.sharedToCommunityDemo)),
-                  );
-                },
-              ),
-              const SizedBox(height: 12),
-              PgButton(
-                label: l10n.done,
-                onPressed: _goHome,
-              ),
-            ],
+      backgroundColor: AppColors.background,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          WorkoutShareCard(
+            boundaryKey: _cardKey,
+            workoutTitle: title,
+            stats: stats,
+            backgroundFile: _backgroundFile,
           ),
-        ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: WorkoutShareIconButton(
+                      icon: Icons.close_rounded,
+                      tooltip: l10n.done,
+                      onPressed: _sharing ? null : _goHome,
+                    ),
+                  ),
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        WorkoutShareIconButton(
+                          icon: Icons.image_outlined,
+                          tooltip: l10n.changeBackground,
+                          onPressed: _sharing ? null : _pickBackground,
+                        ),
+                        const SizedBox(width: 12),
+                        WorkoutShareIconButton(
+                          icon: Icons.ios_share_rounded,
+                          tooltip: l10n.share,
+                          emphasized: true,
+                          onPressed:
+                              _sharing ? null : () => _shareCard(title),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

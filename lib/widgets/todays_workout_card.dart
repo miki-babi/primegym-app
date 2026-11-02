@@ -124,13 +124,13 @@ class TodaysWorkoutCard extends StatelessWidget {
                               const Icon(
                                 Icons.play_arrow_rounded,
                                 size: 22,
-                                color: Color(0xFF1A1200),
+                                color: AppColors.onAccent,
                               ),
                               const SizedBox(width: 8),
                               Text(
                                 ctaLabel,
                                 style: textTheme.labelLarge?.copyWith(
-                                  color: const Color(0xFF1A1200),
+                                  color: AppColors.onAccent,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),

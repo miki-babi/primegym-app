@@ -1,8 +1,9 @@
 import '../l10n/localized_string.dart';
 import '../models/models.dart';
 import 'exercise_images.dart';
-import 'exercise_videos.dart';
+import 'exercise_repository.dart';
 import 'user_preferences.dart';
+import 'workout_catalog.dart';
 
 LocalizedString t(String en, String am, String om) =>
     LocalizedString(en: en, am: am, om: om);
@@ -196,371 +197,13 @@ abstract final class MockData {
     ),
   ];
 
-  static final exercises = [
-    ExerciseItem(
-      id: 'ex1',
-      imageAsset: ExerciseImages.forId('ex1'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex1'),
-      name: t('Barbell Bench Press', 'ባርቤል ቤንች ፕረስ', 'Baarbeelii Beenchii Presse'),
-      muscle: t('Chest', 'ደረት', 'Qoma'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Barbell', 'ባርቤል', 'Baarbeelii'),
-      instructions: t(
-        'Lie on a flat bench, grip the bar slightly wider than shoulders, lower to mid-chest, then press up.',
-        'በጠፍጣፋ ቤንች ላይ ተኛ፣ ባሩን ከትከሻ በትንሹ ሰፋ ብለህ ያዝ፣ ወደ መካከለኛ ደረት አውርድ፣ ከዚያ ወደ ላይ ጫን።',
-        'Beenchii dirree irratti ciisi, baarbeelii gurruu caalaa bal\'inaan qabi, gara qoma giddugaleessaa gadi buusi, sana booda ol dhiibi.',
-      ),
-      commonMistakes: t(
-        'Bouncing the bar off the chest, flaring elbows too wide, or lifting hips off the bench.',
-        'ባሩን በደረት ላይ መምታት፣ ክርኖችን በጣም ማስፋት፣ ወይም ዳሌን ከቤንቹ ማንሳት።',
-        'Baarbeelii qoma irratti dha\'uu, ciboota baay\'ee bal\'isuu, ykn qaama beenchii irraa kaasuun.',
-      ),
-      secondaryMuscles: [
-        t('Triceps', 'ትራይሴፕስ', 'Tiraayseepsii'),
-        t('Shoulders', 'ትከሻዎች', 'Gurruu'),
-      ],
-    ),
-    ExerciseItem(
-      id: 'ex2',
-      imageAsset: ExerciseImages.forId('ex2'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex2'),
-      name: t(
-        'Incline Dumbbell Press',
-        'ኢንክላይን ዳምቤል ፕረስ',
-        'Inkilaayin Daambelii Presse',
-      ),
-      muscle: t('Chest', 'ደረት', 'Qoma'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Dumbbells', 'ዳምቤሎች', 'Daambeloota'),
-      instructions: t(
-        'Set the bench to a mild incline, press dumbbells from chest level to lockout overhead.',
-        'ቤንቹን ቀላል ቁልቁለት አድርግ፣ ዳምቤሎቹን ከደረት ደረጃ እስከ ሙሉ ስፋት ድረስ ጫን።',
-        'Beenchii ol ka\'insa salphaa ta\'e irratti qophiessi, daambeloota sadarkaa qomaa irraa ol dhiibi.',
-      ),
-      commonMistakes: t(
-        'Using too steep an incline or letting dumbbells drift too far forward.',
-        'በጣም ቁልቁለት መጠቀም ወይም ዳምቤሎቹን ወደ ፊት ማስገባት።',
-        'Ol ka\'insa baay\'ee guddaa fayyadamuu ykn daambeloota fuulduraatti darbuu.',
-      ),
-      secondaryMuscles: [t('Shoulders', 'ትከሻዎች', 'Gurruu')],
-    ),
-    ExerciseItem(
-      id: 'ex3',
-      imageAsset: ExerciseImages.forId('ex3'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex3'),
-      name: t('Cable Fly', 'ኬብል ፍላይ', 'Keebilii Flaayii'),
-      muscle: t('Chest', 'ደረት', 'Qoma'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Cable', 'ኬብል', 'Keebilii'),
-      instructions: t(
-        'Stand between cable stacks, bring handles together in a wide arc with a soft elbow bend.',
-        'በኬብል ማሽኖች መካከል ቁም፣ እጀታዎቹን በሰፊ ቅስት በቀላል የክርን መታጠፍ አንድ ላይ አምጣ።',
-        'Gidduu maashinii keebilii dhaabadhu, harkaa keebilii arcii bal\'aa fi ciboo laaffaa waliin walitti fidee.',
-      ),
-      commonMistakes: t(
-        'Locking elbows straight or using too much momentum.',
-        'ክርኖችን ሙሉ በሙሉ ማስተካከል ወይም በፍጥነት መጎተት።',
-        'Ciboota guutummaa diriirsuu ykn saffisa baay\'een harkisuu.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex4',
-      imageAsset: ExerciseImages.forId('ex4'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex4'),
-      name: t('Tricep Pushdown', 'ትራይሴፕ ፑሽዳውን', 'Tiraayseepsii Pushidaawnii'),
-      muscle: t('Triceps', 'ትራይሴፕስ', 'Tiraayseepsii'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Cable', 'ኬብል', 'Keebilii'),
-      instructions: t(
-        'Keep elbows pinned to your sides and push the cable attachment down until arms straighten.',
-        'ክርኖችህን በጎንህ አጣብቅ፣ ኬብሉን ወደ ታች ጫን እስከ እጆችህ እስኪስተካከሉ ድረስ።',
-        'Ciboota cinaacha keetti qabi, keebilii gadi dhiibi hanga harkoonni diriiranitti.',
-      ),
-      commonMistakes: t(
-        'Letting elbows flare forward or shrugging the shoulders.',
-        'ክርኖችን ወደ ፊት ማስገባት ወይም ትከሻዎችን ማንሳት።',
-        'Ciboota fuulduraatti fiduu ykn gurruu ol kaasuun.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex5',
-      imageAsset: ExerciseImages.forId('ex5'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex5'),
-      name: t('Overhead Extension', 'ኦቨርሄድ ኤክስቴንሽን', 'Overheedii Eksiteenshinii'),
-      muscle: t('Triceps', 'ትራይሴፕስ', 'Tiraayseepsii'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Dumbbells', 'ዳምቤሎች', 'Daambeloota'),
-      instructions: t(
-        'Hold a dumbbell overhead, lower it behind the head by bending elbows, then extend.',
-        'ዳምቤልን ከራስ በላይ ያዝ፣ በክርን በማጠፍ ከጭንቅላት በስተጀርባ አውርድ፣ ከዚያ ዘርጋ።',
-        'Daambelii mataa olitti qabi, ciboota qabxiisuun mataa duubaatti buusi, sana booda diriirsi.',
-      ),
-      commonMistakes: t(
-        'Flaring elbows outward or arching the lower back heavily.',
-        'ክርኖችን ወደ ውጭ ማስፋት ወይም የታችኛውን ጀርባ በጣም ማጎብጠት።',
-        'Ciboota alatti bal\'isuu ykn dugda gadii baay\'ee qabxiisuu.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex6',
-      imageAsset: ExerciseImages.forId('ex6'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex6'),
-      name: t('Lateral Raise', 'ላተራል ሬይዝ', 'Laateeraalii Reezii'),
-      muscle: t('Shoulders', 'ትከሻዎች', 'Gurruu'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Dumbbells', 'ዳምቤሎች', 'Daambeloota'),
-      instructions: t(
-        'Raise dumbbells out to the sides until arms reach about shoulder height, then lower slowly.',
-        'ዳምቤሎቹን ወደ ጎን አንሳ እስከ ትከሻ ደረጃ ድረስ፣ ከዚያ ቀስ ብለህ አውርድ።',
-        'Daambeloota cinaachaatti ol kaasi hanga sadarkaa gurruutti, sana booda suuta gadi buusi.',
-      ),
-      commonMistakes: t(
-        'Swinging the weights or raising above ear height with momentum.',
-        'ክብደቶቹን ማወዛወዝ ወይም ከጆሮ በላይ በፍጥነት ማንሳት።',
-        'Ulfaatina sochoosuu ykn gurra olitti saffisaan kaasuun.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex7',
-      imageAsset: ExerciseImages.forId('ex7'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex7'),
-      name: t('Push-up', 'ፑሽ አፕ', 'Push-aapii'),
-      muscle: t('Chest', 'ደረት', 'Qoma'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Bodyweight', 'የሰውነት ክብደት', 'Ulfaatina qaamaa'),
-      instructions: t(
-        'Keep a straight body line, lower chest toward the floor, then press back up.',
-        'ሰውነትህን ቀጥ አድርግ፣ ደረትህን ወደ መሬት አውርድ፣ ከዚያ ወደ ላይ ጫን።',
-        'Qaama kee qajeelchi, qoma gara lafaatti buusi, sana booda ol dhiibi.',
-      ),
-      commonMistakes: t(
-        'Sagging hips, flared elbows, or incomplete range of motion.',
-        'ዳሌን ማንጠልጠል፣ ክርኖችን ማስፋት፣ ወይም ሙሉ እንቅስቃሴ አለማድረግ።',
-        'Qaama gadi lollisuu, ciboota bal\'isuu, ykn sochii guutuu hin gochuun.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex8',
-      imageAsset: ExerciseImages.forId('ex8'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex8'),
-      name: t('Barbell Row', 'ባርቤል ሮው', 'Baarbeelii Roowii'),
-      muscle: t('Back', 'ጀርባ', 'Dugda'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Barbell', 'ባርቤል', 'Baarbeelii'),
-      instructions: t(
-        'Hinge at the hips, pull the bar to the lower ribcage, and squeeze the shoulder blades.',
-        'በዳሌ ተጣፍ፣ ባሩን ወደ ታችኛው የጎድን አጥንት ጎትት፣ የትከሻ ምላጭህን አጣብቅ።',
-        'Qaama qabxiisi, baarbeelii gara lafee cinaachaa gadiitti harkisi, daapha gurruu walitti qabi.',
-      ),
-      commonMistakes: t(
-        'Rounding the back or yanking the bar with momentum.',
-        'ጀርባን ማጎብጠት ወይም ባሩን በፍጥነት መጎተት።',
-        'Dugda qabxiisuu ykn baarbeelii saffisaan harkisuu.',
-      ),
-      secondaryMuscles: [t('Biceps', 'ባይሴፕስ', 'Baayseepsii')],
-    ),
-    ExerciseItem(
-      id: 'ex9',
-      imageAsset: ExerciseImages.forId('ex9'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex9'),
-      name: t('Lat Pulldown', 'ላት ፑልዳውን', 'Laatii Pulidaawnii'),
-      muscle: t('Back', 'ጀርባ', 'Dugda'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Cable', 'ኬብል', 'Keebilii'),
-      instructions: t(
-        'Pull the bar to the upper chest while keeping your torso upright and elbows driving down.',
-        'አካልህን ቀጥ አድርገህ ባሩን ወደ ላይኛው ደረት ጎትት፣ ክርኖችህን ወደ ታች መራ።',
-        'Qaama kee qajeesseettaan baarbeelii gara qoma olitti harkisi, ciboota gadi oofuu.',
-      ),
-      commonMistakes: t(
-        'Leaning too far back or pulling behind the neck.',
-        'በጣም ወደ ኋላ ማጋደል ወይም ከአንገት በስተጀርባ መጎተት።',
-        'Duubaatti baay\'ee gadi jedhuu ykn morma duubaatti harkisuu.',
-      ),
-      secondaryMuscles: [t('Biceps', 'ባይሴፕስ', 'Baayseepsii')],
-    ),
-    ExerciseItem(
-      id: 'ex10',
-      imageAsset: ExerciseImages.forId('ex10'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex10'),
-      name: t('Dumbbell Curl', 'ዳምቤል ኬርል', 'Daambelii Keerlii'),
-      muscle: t('Arms', 'እጆች', 'Harka'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Dumbbells', 'ዳምቤሎች', 'Daambeloota'),
-      instructions: t(
-        'Keep elbows close to your sides and curl the dumbbells up without swinging.',
-        'ክርኖችህን በጎንህ አቆይ፣ ዳምቤሎቹን ሳታወዛውዝ ወደ ላይ ጎትት።',
-        'Ciboota cinaacha keetti qabi, daambeloota osoo hin sochoosin ol harkisi.',
-      ),
-      commonMistakes: t(
-        'Swinging the torso or moving the elbows forward.',
-        'አካልን ማወዛወዝ ወይም ክርኖችን ወደ ፊት ማንቀሳቀስ።',
-        'Qaama sochoosuu ykn ciboota fuulduraatti sochoosuu.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex11',
-      imageAsset: ExerciseImages.forId('ex11'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex11'),
-      name: t('Back Squat', 'ባክ ስኳት', 'Baakii Iskwaatii'),
-      muscle: t('Legs', 'እግሮች', 'Miila'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Barbell', 'ባርቤል', 'Baarbeelii'),
-      instructions: t(
-        'Brace your core, sit the hips back and down, keep chest up, then drive through the mid-foot.',
-        'ኮርህን አጣብቅ፣ ዳሌህን ወደ ኋላና ታች አስቀምጥ፣ ደረትህን አንሳ፣ በመሃል እግር ጫን።',
-        'Kooree kee jabeessi, qaama duuba fi gadi teessisi, qoma ol kaasi, miila giddugaleessaan dhiibi.',
-      ),
-      commonMistakes: t(
-        'Knees collapsing inward or rounding the upper back under the bar.',
-        'ጉልበቶች ወደ ውስጥ መውደቅ ወይም የላይኛው ጀርባ ማጎብጠት።',
-        'Jilba keessatti kufuu ykn dugda olii qabxiisuu.',
-      ),
-      secondaryMuscles: [
-        t('Glutes', 'ቂጣ', 'Fudhaa'),
-        t('Core', 'ኮር', 'Kooree'),
-      ],
-    ),
-    ExerciseItem(
-      id: 'ex12',
-      imageAsset: ExerciseImages.forId('ex12'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex12'),
-      name: t('Romanian Deadlift', 'ሮማኒያን ዴድሊፍት', 'Roomaaniyaan Dediliiftii'),
-      muscle: t('Legs', 'እግሮች', 'Miila'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Barbell', 'ባርቤል', 'Baarbeelii'),
-      instructions: t(
-        'Push hips back with a soft knee bend, lower the bar along the thighs, then return upright.',
-        'ጉልበት ቀላል በማጠፍ ዳሌን ወደ ኋላ ጫን፣ ባሩን በጭን ላይ አውርድ፣ ከዚያ ቀጥ በል።',
-        'Jilba laaffaa ta\'een qaama duubaatti dhiibi, baarbeelii lukkuu irratti gadi buusi, sana booda qajeeli.',
-      ),
-      commonMistakes: t(
-        'Rounding the spine or turning it into a squat by bending the knees too much.',
-        'አከርካሪን ማጎብጠት ወይም ጉልበቶችን በጣም በማጠፍ ወደ ስኳት መቀየር።',
-        'Lafee dugdaa qabxiisuu ykn jilba baay\'ee qabxiisuun gara iskwaatii jijjiiruu.',
-      ),
-      secondaryMuscles: [
-        t('Back', 'ጀርባ', 'Dugda'),
-        t('Glutes', 'ቂጣ', 'Fudhaa'),
-      ],
-    ),
-    ExerciseItem(
-      id: 'ex13',
-      imageAsset: ExerciseImages.forId('ex13'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex13'),
-      name: t('Walking Lunge', 'ዋኪንግ ለንጅ', 'Waalkingii Lenjii'),
-      muscle: t('Legs', 'እግሮች', 'Miila'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Dumbbells', 'ዳምቤሎች', 'Daambeloota'),
-      instructions: t(
-        'Step forward into a lunge, lower the back knee, then drive up into the next step.',
-        'ወደ ፊት እርምጃ ውሰድ፣ የኋላ ጉልበት አውርድ፣ ከዚያ ወደ ቀጣዩ እርምጃ ተነሳ።',
-        'Fuulduraatti tarkaanfadhu, jilba duubaa gadi buusi, sana booda tarkaanfii itti aanutti ka\'i.',
-      ),
-      commonMistakes: t(
-        'Taking tiny steps or letting the front knee cave inward.',
-        'ትንንሽ እርምጃዎች መውሰድ ወይም የፊት ጉልበት ወደ ውስጥ መውደቅ።',
-        'Tarkaanfii xixiqqoo fudhachuu ykn jilba duraa keessatti kufuu.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex14',
-      imageAsset: ExerciseImages.forId('ex14'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex14'),
-      name: t('Overhead Press', 'ኦቨርሄድ ፕረስ', 'Overheedii Presse'),
-      muscle: t('Shoulders', 'ትከሻዎች', 'Gurruu'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      equipment: t('Barbell', 'ባርቤል', 'Baarbeelii'),
-      instructions: t(
-        'Brace your core and press the bar from the shoulders to full lockout overhead.',
-        'ኮርህን አጣብቅ፣ ባሩን ከትከሻ እስከ ሙሉ ስፋት ከራስ በላይ ጫን።',
-        'Kooree kee jabeessi, baarbeelii gurruu irraa mataa oliitti guutummaa diriirsuun dhiibi.',
-      ),
-      commonMistakes: t(
-        'Excessive lower-back arch or pressing the bar forward instead of up.',
-        'የታችኛው ጀርባ በጣም ማጎብጠት ወይም ባሩን ወደ ፊት መጫን።',
-        'Dugda gadii baay\'ee qabxiisuu ykn baarbeelii ol utuu hin taane fuulduraatti dhiibuu.',
-      ),
-      secondaryMuscles: [t('Triceps', 'ትራይሴፕስ', 'Tiraayseepsii')],
-    ),
-    ExerciseItem(
-      id: 'ex15',
-      imageAsset: ExerciseImages.forId('ex15'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex15'),
-      name: t('Face Pull', 'ፌስ ፑል', 'Feesii Pulii'),
-      muscle: t('Shoulders', 'ትከሻዎች', 'Gurruu'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Cable', 'ኬብል', 'Keebilii'),
-      instructions: t(
-        'Pull the rope toward your face, externally rotating so hands finish near the ears.',
-        'ገመዱን ወደ ፊትህ ጎትት፣ እጆችህ አጠገብ ጆሮ እንዲደርሱ በማድረግ አሽከርክር።',
-        'Funyoo gara fuula keetti harkisi, harkoonni gara gurraatti akka dhufanitti naannessi.',
-      ),
-      commonMistakes: t(
-        'Using too much weight and turning it into a row without rotation.',
-        'በጣም ክብደት መጠቀም እና ያለ ማሽከርከር ወደ ሮው መቀየር።',
-        'Ulfaatina baay\'ee fayyadamuu fi osoo hin naannessin gara roowii jijjiiruu.',
-      ),
-    ),
-    ExerciseItem(
-      id: 'ex16',
-      imageAsset: ExerciseImages.forId('ex16'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex16'),
-      name: t('Bodyweight Squat', 'የሰውነት ክብደት ስኳት', 'Iskwaatii ulfaatina qaamaa'),
-      muscle: t('Legs', 'እግሮች', 'Miila'),
-      type: t('Compound', 'ውህድ', 'Walitti makaa'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Bodyweight', 'የሰውነት ክብደት', 'Ulfaatina qaamaa'),
-      instructions: t(
-        'Stand with feet shoulder-width, sit hips back and down, then drive up through the heels.',
-        'እግሮችን በትከሻ ስፋት አድርግ፣ ዳሌን ወደ ኋላና ታች አውርድ፣ ከዚያ በተረከዝ ተነሳ።',
-        'Miila bal\'ina gurruu ta\'eetti dhaabadhu, qaama duubaafi gadiitti buusi, sana booda dugda miilaan ka\'i.',
-      ),
-      commonMistakes: t(
-        'Knees caving inward or lifting heels off the floor.',
-        'ጉልበቶች ወደ ውስጥ መውደቅ ወይም ተረከዝ ከመሬት ማንሳት።',
-        'Jilba keessatti kufuu ykn dugda miilaa lafa irraa kaasuun.',
-      ),
-      secondaryMuscles: [t('Glutes', 'ቂጣ', 'Fudhaa')],
-    ),
-    ExerciseItem(
-      id: 'ex17',
-      imageAsset: ExerciseImages.forId('ex17'),
-      youtubeVideoId: ExerciseVideos.forExerciseId('ex17'),
-      name: t('Plank', 'ፕላንክ', 'Pilaankii'),
-      muscle: t('Core', 'ኮር', 'Kooree'),
-      type: t('Isolation', 'ነጠላ', 'Addaan baasuu'),
-      difficulty: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      equipment: t('Bodyweight', 'የሰውነት ክብደት', 'Ulfaatina qaamaa'),
-      instructions: t(
-        'Hold a straight body line on forearms and toes, bracing the core without letting hips sag.',
-        'በክንድ እና ጣቶች ላይ ቀጥ ያለ የሰውነት መስመር አቆይ፣ ዳሌ ሳይወድቅ ኮርህን አጣብቅ።',
-        'Harkaafi quba miilaa irratti sarara qaamaa qajeelaa eegi, qaama utuu hin lollisiin kooree jabeessi.',
-      ),
-      commonMistakes: t(
-        'Hips sagging toward the floor or hiking too high.',
-        'ዳሌ ወደ መሬት መውደቅ ወይም በጣም ከፍ ማድረግ።',
-        'Qaama gara lafaatti lollisuu ykn baay\'ee ol kaasuu.',
-      ),
-    ),
-  ];
+  static List<WorkoutPlan> get recommendedWorkouts =>
+      WorkoutCatalog.plansFrom(ExerciseRepository.instance.exercises);
 
-  static WorkoutPlan get todaysWorkout => WorkoutPlan(
+  static WorkoutPlan get todaysWorkout {
+    final plans = recommendedWorkouts;
+    if (plans.isEmpty) {
+      return WorkoutPlan(
         id: 'w1',
         title: t('Chest + Triceps', 'ደረት + ትራይሴፕስ', 'Qoma + Tiraayseepsii'),
         durationMinutes: 45,
@@ -572,111 +215,14 @@ abstract final class MockData {
         ],
         owner: currentUser,
         tag: t('Today', 'ዛሬ', 'Har\'a'),
-        exercises: [
-          WorkoutExercise(exercise: exercises[0], sets: 4, reps: 8, weightKg: 80),
-          WorkoutExercise(exercise: exercises[1], sets: 3, reps: 10, weightKg: 28),
-          WorkoutExercise(exercise: exercises[2], sets: 3, reps: 12, weightKg: 20),
-          WorkoutExercise(exercise: exercises[5], sets: 3, reps: 12, weightKg: 10),
-          WorkoutExercise(exercise: exercises[3], sets: 3, reps: 12, weightKg: 25),
-          WorkoutExercise(exercise: exercises[4], sets: 3, reps: 10, weightKg: 16),
-          WorkoutExercise(exercise: exercises[6], sets: 2, reps: 15, weightKg: 0),
-        ],
+        exercises: const [],
       );
-
-  static final recommendedWorkouts = [
-    todaysWorkout,
-    WorkoutPlan(
-      id: 'w2',
-      title: t('Push Day', 'ፑሽ ቀን', 'Guyyaa Pushii'),
-      durationMinutes: 45,
-      level: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      muscles: [
-        t('Chest', 'ደረት', 'Qoma'),
-        t('Shoulders', 'ትከሻዎች', 'Gurruu'),
-        t('Triceps', 'ትራይሴፕስ', 'Tiraayseepsii'),
-      ],
-      owner: 'Abel',
-      tag: t('Popular', 'ታዋቂ', 'Beekamaa'),
-      exercises: todaysWorkout.exercises,
-    ),
-    WorkoutPlan(
-      id: 'w5',
-      title: t('Back + Biceps', 'ጀርባ + ባይሴፕስ', 'Dugda + Baayseepsii'),
-      durationMinutes: 50,
-      level: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      muscles: [
-        t('Back', 'ጀርባ', 'Dugda'),
-        t('Arms', 'እጆች', 'Harka'),
-      ],
-      owner: 'Hana',
-      tag: t('Pull', 'ፑል', 'Pulii'),
-      exercises: [
-        WorkoutExercise(exercise: exercises[7], sets: 4, reps: 8, weightKg: 70),
-        WorkoutExercise(exercise: exercises[8], sets: 3, reps: 10, weightKg: 45),
-        WorkoutExercise(exercise: exercises[9], sets: 3, reps: 12, weightKg: 14),
-      ],
-    ),
-    WorkoutPlan(
-      id: 'w6',
-      title: t('Legs Day', 'የእግር ቀን', 'Guyyaa Miilaa'),
-      durationMinutes: 55,
-      level: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      muscles: [t('Legs', 'እግሮች', 'Miila')],
-      owner: 'Dawit',
-      tag: t('Lower', 'ታችኛ', 'Gadii'),
-      exercises: [
-        WorkoutExercise(exercise: exercises[10], sets: 4, reps: 6, weightKg: 100),
-        WorkoutExercise(exercise: exercises[11], sets: 3, reps: 8, weightKg: 80),
-        WorkoutExercise(exercise: exercises[12], sets: 3, reps: 10, weightKg: 20),
-      ],
-    ),
-    WorkoutPlan(
-      id: 'w7',
-      title: t('Shoulders Focus', 'ትኩረት ትከሻ', 'Xiyyeeffannoo Gurruu'),
-      durationMinutes: 35,
-      level: t('Intermediate', 'መካከለኛ', 'Giddugaleessa'),
-      muscles: [t('Shoulders', 'ትከሻዎች', 'Gurruu')],
-      owner: 'Sara',
-      tag: t('Focus', 'ትኩረት', 'Xiyyeeffannoo'),
-      exercises: [
-        WorkoutExercise(exercise: exercises[13], sets: 4, reps: 8, weightKg: 40),
-        WorkoutExercise(exercise: exercises[5], sets: 3, reps: 12, weightKg: 10),
-        WorkoutExercise(exercise: exercises[14], sets: 3, reps: 15, weightKg: 20),
-      ],
-    ),
-    WorkoutPlan(
-      id: 'w3',
-      title: t('Home Full Body', 'በቤት ሙሉ አካል', 'Manaa Qaama Guutuu'),
-      durationMinutes: 30,
-      level: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      muscles: [t('Full body', 'ሙሉ አካል', 'Qaama guutuu')],
-      owner: currentUser,
-      tag: t('Home', 'ቤት', 'Mana'),
-      exercises: [
-        WorkoutExercise(exercise: exercises[6], sets: 3, reps: 12, weightKg: 0),
-        WorkoutExercise(exercise: exercises[5], sets: 3, reps: 12, weightKg: 8),
-        WorkoutExercise(exercise: exercises[12], sets: 3, reps: 10, weightKg: 12),
-        WorkoutExercise(exercise: exercises[4], sets: 3, reps: 12, weightKg: 10),
-      ],
-    ),
-    WorkoutPlan(
-      id: 'w4',
-      title: t('15-Min Burn', '15 ደቂቃ ማቃጠል', 'Gubuu Daqiiqaa 15'),
-      durationMinutes: 15,
-      level: t('Beginner', 'ጀማሪ', 'Jalqabaa'),
-      muscles: [
-        t('Full body', 'ሙሉ አካል', 'Qaama guutuu'),
-        t('Cardio', 'ካርዲዮ', 'Kaardiyoo'),
-      ],
-      owner: 'Abel',
-      tag: t('Quick', 'ፈጣን', 'Saffisaa'),
-      exercises: [
-        WorkoutExercise(exercise: exercises[6], sets: 4, reps: 20, weightKg: 0),
-        WorkoutExercise(exercise: exercises[15], sets: 3, reps: 15, weightKg: 0),
-        WorkoutExercise(exercise: exercises[16], sets: 3, reps: 40, weightKg: 0),
-      ],
-    ),
-  ];
+    }
+    for (final plan in plans) {
+      if (plan.id == 'w1') return plan;
+    }
+    return plans.first;
+  }
 
   static final muscleFilters = [
     t('Full body', 'ሙሉ አካል', 'Qaama guutuu'),
@@ -752,52 +298,11 @@ abstract final class MockData {
     }).toList();
   }
 
-  static bool exerciseMatchesEnvironment(
-    ExerciseItem exercise,
-    TrainingEnvironment environment,
-  ) {
-    final equipment = exercise.equipment.en;
-    return switch (environment) {
-      TrainingEnvironment.noEquipment => equipment == 'Bodyweight',
-      TrainingEnvironment.home =>
-        equipment == 'Bodyweight' || equipment == 'Dumbbells',
-      TrainingEnvironment.gym => true,
-    };
-  }
-
-  static bool exerciseMatchesEnvironments(
-    ExerciseItem exercise,
-    Set<TrainingEnvironment> environments,
-  ) {
-    if (environments.isEmpty) return true;
-    return environments.any(
-      (env) => exerciseMatchesEnvironment(exercise, env),
-    );
-  }
-
-  static bool workoutMatchesEnvironments(
-    WorkoutPlan workout,
-    Set<TrainingEnvironment> environments,
-  ) {
-    if (workout.exercises.isEmpty) return false;
-    return workout.exercises.every(
-      (we) => exerciseMatchesEnvironments(we.exercise, environments),
-    );
-  }
-
   static List<WorkoutPlan> workoutsForEnvironments(
     Set<TrainingEnvironment> environments,
   ) {
     return recommendedWorkouts
         .where((w) => workoutMatchesEnvironments(w, environments))
-        .toList();
-  }
-
-  static List<ExerciseItem> exercisesForEnvironments(
-    Set<TrainingEnvironment> environments,
-  ) {
-    return exercises
-        .where((e) => exerciseMatchesEnvironments(e, environments))
         .toList();
   }
 
@@ -1258,6 +763,9 @@ abstract final class MockData {
         'በአዲስ አበባ አንሻላዎችን በሂደታዊ ፕሮግራሞች እና በቅርጽ ቀዳሚ አሰልጣኝነት ጡንቻ እንዲገነቡ ትረዳለች።',
         'Kaastota Finfinnee progiraamii adeemsaa fi leenjii foormii duraan maashaa akka ijaaran gargaarti.',
       ),
+      location: t('Bole, Addis Ababa', 'ቦሌ፣ አዲስ አበባ', 'Boolee, Finfinnee'),
+      offersInPerson: true,
+      offersOnline: false,
       programs: [
         t(
           '12-Week Muscle Builder',
@@ -1273,6 +781,43 @@ abstract final class MockData {
           'Form Fix Sessions',
           'የቅርጽ ማስተካከያ ክፍለ ጊዜዎች',
           'Seshinoota Foormii Sirreessuu',
+        ),
+      ],
+      certifications: const [
+        TrainerCertification(
+          name: 'NASM Certified Personal Trainer',
+          issuer: 'NASM',
+          year: 2019,
+        ),
+        TrainerCertification(
+          name: 'NSCA Certified Strength & Conditioning Specialist',
+          issuer: 'NSCA',
+          year: 2021,
+        ),
+        TrainerCertification(
+          name: 'CPR/AED',
+          issuer: 'Red Cross',
+          year: 2024,
+        ),
+      ],
+      testimonials: [
+        TrainerTestimonial(
+          author: 'Meron K.',
+          rating: 5.0,
+          text: t(
+            'Liya rebuilt my squat form in three sessions — I added 20 kg in two months.',
+            'ሊያ በሶስት ክፍለ ጊዜዎች የስኳት ቅርጼን አስተካከለች — በሁለት ወር 20 ኪግ ጨመርኩ።',
+            'Liyaan foormii iskuwatii koo sesshinii sadii keessatti sirreessite — ji\'a lama keessatti kg 20 dabalee.',
+          ),
+        ),
+        TrainerTestimonial(
+          author: 'Robel D.',
+          rating: 4.5,
+          text: t(
+            'Structured programs, honest feedback, and she actually answers messages between sessions.',
+            'ዝግጁ ፕሮግራሞች፣ ታማኝ ግብረመልስ፣ እና በክፍለ ጊዜዎች መካከል መልእክቶችን ትመልሳለች።',
+            'Sagantaawwan qindaa\'an, deebii dhugaa, fi sesshinii gidduutti ergaalees deebisti.',
+          ),
         ),
       ],
     ),
@@ -1298,6 +843,9 @@ abstract final class MockData {
         'በዘላቂ የስብ ማጣት እና የአካባቢ የምግብ ልማዶች ላይ ያተኮረ ከፍተኛ ኢነርጂ ኮንዲሽኒንግ አሰልጣኝ።',
         'Koachii kondishiningii anniisaa olaanaa hir\'ina dhangala\'aa itti fufiinsaa fi amala nyaata naannoo irratti xiyyeeffate.',
       ),
+      location: t('CMC, Addis Ababa', 'ሲኤምሲ፣ አዲስ አበባ', 'CMC, Finfinnee'),
+      offersInPerson: true,
+      offersOnline: true,
       programs: [
         t(
           '8-Week Fat Loss Sprint',
@@ -1309,6 +857,39 @@ abstract final class MockData {
           'Accountability Check-ins',
           'የተጠያቂነት ቼክ-ኢኖች',
           'Check-in Itti Gaafatamummaa',
+        ),
+      ],
+      certifications: const [
+        TrainerCertification(
+          name: 'ACE Personal Trainer',
+          issuer: 'ACE',
+          year: 2021,
+        ),
+        TrainerCertification(
+          name: 'Precision Nutrition Level 1',
+          issuer: 'Precision Nutrition',
+          year: 2022,
+        ),
+        TrainerCertification(name: 'CPR/AED', issuer: 'Red Cross', year: 2023),
+      ],
+      testimonials: [
+        TrainerTestimonial(
+          author: 'Tigist A.',
+          rating: 5.0,
+          text: t(
+            'Lost 8 kg in the 8-week sprint without giving up injera — his meal tweaks are realistic.',
+            'በ8 ሳምንቱ ስፕሪንት እንጀራ ሳልተው 8 ኪግ አጣሁ — የምግብ ማስተካከያዎቹ እውነተኛ ናቸው።',
+            'Ispiriintii torban 8 keessatti kg 8 hir\'isee, buddeena dhiisuun malee — jijjiiramni nyaataa isaa dhugaafataa dha.',
+          ),
+        ),
+        TrainerTestimonial(
+          author: 'Samuel G.',
+          rating: 4.5,
+          text: t(
+            'HIIT sessions are tough but fun; he keeps you accountable every week.',
+            'የHIIT ክፍለ ጊዜዎች ከባድ ግን አስደሳች ናቸው፤ ሳምንት ሳምንት ተጠያቂ ያደርግዎታል።',
+            'Sesshinootni HIIT cimaa garuu gammachuu qabu; torban hunda itti gaafatama si taasisa.',
+          ),
         ),
       ],
     ),
@@ -1334,6 +915,13 @@ abstract final class MockData {
         'በቦሌ አካባቢ ለቢሮ ሰራተኞች እና ለተመለሱ አትሌቶች ተንቀሳቃሽነት ቀዳሚ ስልጠና።',
         'Leenjii sochii duraa hojjettoota deeskii fi atileetota deebi\'an Boolee naannoo.',
       ),
+      location: t(
+        'Kazanchis, Addis Ababa',
+        'ካዛንቺስ፣ አዲስ አበባ',
+        'Kaazaanchis, Finfinnee',
+      ),
+      offersInPerson: true,
+      offersOnline: true,
       programs: [
         t('Desk Athlete Reset', 'የቢሮ አትሌት ዳግም ማስጀመር', 'Resetii Atileetii Deeskii'),
         t(
@@ -1342,6 +930,38 @@ abstract final class MockData {
           'Cimina Mijataa Gidduu',
         ),
         t('Posture & Core', 'አቋም እና ኮር', 'Haala Qaamaa & Kooree'),
+      ],
+      certifications: const [
+        TrainerCertification(
+          name: 'FRC Mobility Specialist',
+          issuer: 'Functional Range Conditioning',
+          year: 2020,
+        ),
+        TrainerCertification(
+          name: 'NASM Corrective Exercise Specialist',
+          issuer: 'NASM',
+          year: 2021,
+        ),
+      ],
+      testimonials: [
+        TrainerTestimonial(
+          author: 'Betelhem W.',
+          rating: 5.0,
+          text: t(
+            'My lower-back pain is gone after six weeks of her mobility plan.',
+            'በስድስት ሳምንት የተንቀሳቃሽነት እቅዷ የደረባ ህመም ነጠቀኝ።',
+            'Dhukkubni dugda kooa gadii pilaanii sochii ishee torban jaa\'aa booda dhaane.',
+          ),
+        ),
+        TrainerTestimonial(
+          author: 'Kebede T.',
+          rating: 4.5,
+          text: t(
+            'Great for desk workers — my shoulders finally move freely again.',
+            'ለቢሮ ሰራተኞች በጣም ጥሩ — ትከሻዬ በመጨረሻ ነፃነት እንደገና እንቀሳቀሳል።',
+            'Hojjettoota deeskii baay\'ee gaarii — gat\'oo koo dhumarratti bilisaan socho\'e.',
+          ),
+        ),
       ],
     ),
     TrainerProfile(
@@ -1362,10 +982,177 @@ abstract final class MockData {
         'ለመካከለኛ አትሌቶች በቴክኒክ ላይ ያተኮረ የኦሎምፒክ ማንሳት አሰልጣኝ።',
         'Koachii kaasuu olimpikii teekinikii irratti xiyyeeffate atileetota giddugaleessaaf.',
       ),
+      location: t(
+        'Kazanchis, Addis Ababa',
+        'ካዛንቺስ፣ አዲስ አበባ',
+        'Kaazaanchis, Finfinnee',
+      ),
+      offersInPerson: true,
+      offersOnline: false,
       programs: [
         t('Snatch Foundations', 'የስናች መሠረቶች', 'Bu\'uura Snaachii'),
         t('Clean & Jerk Cycle', 'ክሊን እና ጀርክ ዑደት', 'Saaykilii Kiliin & Jerk'),
         t('Competition Prep', 'የውድድር ዝግጅት', 'Qophii Dorgommii'),
+      ],
+      certifications: const [
+        TrainerCertification(
+          name: 'Eleiko Weightlifting Coach Level 2',
+          issuer: 'Eleiko',
+          year: 2021,
+        ),
+        TrainerCertification(name: 'CPR/AED', issuer: 'Red Cross', year: 2023),
+      ],
+      testimonials: [
+        TrainerTestimonial(
+          author: 'Nahom S.',
+          rating: 5.0,
+          text: t(
+            'His cue-based coaching finally fixed my snatch turnover.',
+            'በምልክት ላይ የተመሠረተ አሰልጣኝነቱ የስናች ተርንኦቨሬን በመጨረሻ አስተካከለ።',
+            'Koachingni isaa mallattoo irratti hundaa\'e turnover snaachii koo dhumarratti sirreesse.',
+          ),
+        ),
+        TrainerTestimonial(
+          author: 'Eden M.',
+          rating: 4.5,
+          text: t(
+            'Strict but patient — competition prep felt organized from day one.',
+            'ጥብቅ ግን ትዕግሥት ያለው — የውድድር ዝግጅት ከቀን አንድ ጀምሮ የተዋቀረ ነበር።',
+            'Cimaa garuu obsa qabu — qophiin dorgommii guyyaa tokkoo kaasee qindaa\'ee ture.',
+          ),
+        ),
+      ],
+    ),
+    TrainerProfile(
+      id: 't5',
+      name: 'Hanna Girma',
+      specialization: t(
+        'Online Coaching',
+        'የመስመር ላይ አሰልጣኝነት',
+        'Koachii onlaayinii',
+      ),
+      yearsExperience: 3,
+      gym: 'Remote',
+      rating: 4.5,
+      pricePerSessionEtb: 400,
+      availability: t('Flexible', 'ተለዋዋጭ', 'Mijataa'),
+      bio: t(
+        'Remote programming with weekly video check-ins so you can train from anywhere.',
+        'ከማንኛውም ቦታ እንድትልማመዱ የሚያስችል ሳምንታዊ የቪዲዮ ቼክ-ኢኖች ያሉት የርቀት ፕሮግራም።',
+        'Progiraamii fageenya check-in viidiyoo torban hundaatiin bakka kamu irraa akka leenjitan.',
+      ),
+      location: t('Online', 'መስመር ላይ', 'Onlaayinii'),
+      offersInPerson: false,
+      offersOnline: true,
+      programs: [
+        t(
+          'Remote Strength Plan',
+          'የርቀት ጥንካሬ እቅድ',
+          'Pilaanii Ciminaa Fageenya',
+        ),
+        t(
+          'Weekly Video Check-ins',
+          'ሳምንታዊ የቪዲዮ ቼክ-ኢኖች',
+          'Check-in Viidiyoo Torbanii',
+        ),
+      ],
+      certifications: const [
+        TrainerCertification(
+          name: 'NASM Certified Personal Trainer',
+          issuer: 'NASM',
+          year: 2022,
+        ),
+        TrainerCertification(
+          name: 'Precision Nutrition Level 1',
+          issuer: 'Precision Nutrition',
+          year: 2023,
+        ),
+      ],
+      testimonials: [
+        TrainerTestimonial(
+          author: 'Bontu S.',
+          rating: 5.0,
+          text: t(
+            'Weekly video check-ins keep me consistent even while traveling.',
+            'ሳምንታዊ የቪዲዮ ቼክ-ኢኖች እንኳን በጉዞ ላይ ሳለሁ ቀጣይ እንድሆን ያደረጉኛል።',
+            'Check-in viidiyoo torbanii imala irrattillee itti fufiinsa naaf kenne.',
+          ),
+        ),
+        TrainerTestimonial(
+          author: 'Abdi F.',
+          rating: 4.5,
+          text: t(
+            'Programming is clear and she adjusts quickly when my schedule changes.',
+            'ፕሮግራሟ ግልጽ ነው እና መርሃ ግብሬ ሲለወጥ በፍጥነት ታስተካክላለች።',
+            'Sagantaan ishee ifa dha, yeroon koo yeroo jijjiiramu ariitidhaan sirreessiti.',
+          ),
+        ),
+      ],
+    ),
+    TrainerProfile(
+      id: 't6',
+      name: 'Dawit Alemu',
+      specialization: t(
+        'Beginner & Weight Loss',
+        'ጀማሪ እና ክብደት መቀነስ',
+        'Jalqabaa & Hir\'ina Ulfaatinaa',
+      ),
+      yearsExperience: 7,
+      gym: 'Adama Fitness Club',
+      rating: 4.4,
+      pricePerSessionEtb: 500,
+      availability: t(
+        'Mon–Sat · afternoons',
+        'ሰኞ–ቅዳሜ · ከሰዓት በኋላ',
+        'Wiixata–Sanbata · waaree booda',
+      ),
+      bio: t(
+        'Patient coach in Adama helping beginners build habits and lose weight safely.',
+        'በአዳማ ጀማሪዎች ልማድ እንዲገነቡ እና ክብደት በደህና እንዲቀንሱ የሚረዳ ትዕግሥት ያለው አሰልጣኝ።',
+        'Koachii obsa qabu Adaamaa jalqabtoota amala ijaaruu fi ulfaatina salphaatti hir\'isuuf gargaaru.',
+      ),
+      location: t('Adama', 'አዳማ', 'Adaamaa'),
+      offersInPerson: true,
+      offersOnline: false,
+      programs: [
+        t(
+          'Beginner Foundations',
+          'የጀማሪ መሠረቶች',
+          'Bu\'uurawwan Jalqabaa',
+        ),
+        t(
+          '12-Week Weight Loss',
+          'የ12 ሳምንት ክብደት መቀነስ',
+          'Hir\'ina Ulfaatinaa Torbee 12',
+        ),
+      ],
+      certifications: const [
+        TrainerCertification(
+          name: 'ISSA Certified Fitness Trainer',
+          issuer: 'ISSA',
+          year: 2017,
+        ),
+        TrainerCertification(name: 'CPR/AED', issuer: 'Red Cross', year: 2023),
+      ],
+      testimonials: [
+        TrainerTestimonial(
+          author: 'Abebe G.',
+          rating: 5.0,
+          text: t(
+            'As a total beginner I never felt judged — I have lost 10 kg this year.',
+            'እንደ ሙሉ ጀማሪ ፈጽሞ እንደተፈረደብኝ አልተሰማኝም — በዚህ ዓመት 10 ኪግ ቀንሻለሁ።',
+            'Akkuma jalqabaa guttuu akkumaan mulludha hin dhaga\'ame — waggaa kana kg 10 hir\'isee jira.',
+          ),
+        ),
+        TrainerTestimonial(
+          author: 'Chaltu B.',
+          rating: 4.5,
+          text: t(
+            'He explains everything simply and adjusts when work gets busy.',
+            'ሁሉንም ነገር በቀላሉ ይገልጻል እና ስራ ሲጨምር ያስተካክላል።',
+            'Waanti hundi salphaatti ibsa, hojiin yoo baay\'u sirreessa.',
+          ),
+        ),
       ],
     ),
   ];
@@ -1548,12 +1335,5 @@ abstract final class MockData {
     final list = friendWorkouts.where((s) => s.friendName == name).toList();
     list.sort((a, b) => b.date.compareTo(a.date));
     return list;
-  }
-
-  static ExerciseItem? exerciseById(String id) {
-    for (final e in exercises) {
-      if (e.id == id) return e;
-    }
-    return null;
   }
 }

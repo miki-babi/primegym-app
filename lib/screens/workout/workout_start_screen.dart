@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/exercise_preferences.dart';
+import '../../data/exercise_repository.dart';
 import '../../data/mock_data.dart';
 import '../../data/user_preferences.dart';
 import '../../l10n/l10n_ext.dart';
@@ -26,7 +27,7 @@ class _WorkoutStartScreenState extends State<WorkoutStartScreen> {
   Set<String> get _likedMuscles {
     final liked = <String>{};
     for (final id in ExercisePreferences.likedExerciseIds()) {
-      final ex = MockData.exerciseById(id);
+      final ex = ExerciseRepository.instance.exerciseById(id);
       if (ex != null) liked.add(ex.muscle.en);
     }
     return liked;
@@ -35,7 +36,7 @@ class _WorkoutStartScreenState extends State<WorkoutStartScreen> {
   Set<String> get _dislikedMuscles {
     final disliked = <String>{};
     for (final id in ExercisePreferences.dislikedExerciseIds()) {
-      final ex = MockData.exerciseById(id);
+      final ex = ExerciseRepository.instance.exerciseById(id);
       if (ex != null) disliked.add(ex.muscle.en);
     }
     return disliked;

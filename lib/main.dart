@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app.dart';
 import 'data/app_store.dart';
+import 'data/exercise_repository.dart';
 import 'data/order_store.dart';
 import 'data/user_preferences.dart';
 import 'l10n/locale_controller.dart';
@@ -12,5 +13,6 @@ Future<void> main() async {
   await UserPreferences.load();
   await OrderStore.load();
   await AppStore.load();
+  await ExerciseRepository.instance.initialize();
   runApp(PrimeGymApp());
 }

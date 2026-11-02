@@ -25,12 +25,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final workout = MockData.todaysWorkoutFor(
-      UserPreferences.instance.environments,
-    );
-    final shopProducts = MockData.personalizedProducts(
-      UserPreferences.instance.environments,
-    );
+    final prefs = UserPreferences.instance;
+    final displayName = prefs.resolvedDisplayName;
+    final workout = MockData.todaysWorkoutFor(prefs.environments);
+    final shopProducts = MockData.personalizedProducts(prefs.environments);
     final textTheme = Theme.of(context).textTheme;
     final l10n = context.l10n;
     final locale = Localizations.localeOf(context);
@@ -51,28 +49,14 @@ class HomeScreen extends StatelessWidget {
                           Text(
                             l10n.greetingWithName(
                               _greeting(l10n),
-                              MockData.currentUser,
+                              displayName,
                             ),
                             style: textTheme.headlineSmall,
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            children: [
-                              const Text('🔥', style: TextStyle(fontSize: 14)),
-                              const SizedBox(width: 6),
-                              Text(
-                                l10n.dayStreak(MockData.streakDays),
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: AppColors.accent,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ),
                     ),
-                    const UserAvatar(name: MockData.currentUser, size: 44),
+                    UserAvatar(name: displayName, size: 44),
                     const SizedBox(width: 12),
                     Container(
                       width: 44,

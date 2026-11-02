@@ -21,8 +21,10 @@ import '../screens/shop/shop_screen.dart';
 import '../screens/workout/active_workout_screen.dart';
 import '../screens/workout/workout_complete_screen.dart';
 import '../screens/workout/workout_detail_screen.dart';
+import '../screens/workout/workout_share_screen.dart';
 import '../screens/workout/workout_start_screen.dart';
 import '../widgets/main_shell.dart';
+import '../widgets/swipe_to_pop.dart';
 
 final GlobalKey<NavigatorState> _rootKey = GlobalKey<NavigatorState>();
 
@@ -66,7 +68,7 @@ CupertinoPage<void> _stackPage({
 }) {
   return CupertinoPage<void>(
     key: key,
-    child: child,
+    child: SwipeToPop(child: child),
     fullscreenDialog: fullscreenDialog,
   );
 }
@@ -164,6 +166,15 @@ GoRouter createRouter() {
                 workoutId: state.pathParameters['id']!,
               ),
               fullscreenDialog: true,
+            ),
+          ),
+          GoRoute(
+            path: 'share',
+            pageBuilder: (context, state) => _stackPage(
+              key: state.pageKey,
+              child: WorkoutShareScreen(
+                workoutId: state.pathParameters['id']!,
+              ),
             ),
           ),
         ],

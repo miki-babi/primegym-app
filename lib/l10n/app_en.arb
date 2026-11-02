@@ -7,6 +7,8 @@
   "navProfile": "Profile",
   "onboardingGetStarted": "Get started",
   "onboardingContinue": "Continue",
+  "onboardingNext": "Next",
+  "onboardingSkip": "Skip",
   "onboardingEnterHome": "Enter home",
   "onboardingChooseLanguageTitle": "Choose your language",
   "onboardingChooseLanguageSubtitle": "You can change this anytime in settings.",
@@ -311,7 +313,9 @@
   "statYears": "Years",
   "statSession": "Session",
   "sectionPrograms": "Programs",
-  "bookDemo": "Book (demo)",
+  "sectionCertifications": "Certifications",
+  "sectionTestimonials": "Testimonials",
+  "bookDemo": "Book",
   "bookingDemoOnly": "Booking is demo-only",
   "eventsTitle": "Events",
   "eventAttendingMeta": "{time} · {count} attending",
@@ -339,6 +343,11 @@
   "joinedEventDemo": "Joined event (demo)",
   "challengesTitle": "Challenges",
   "noChallengesInFilter": "No challenges in this filter",
+  "filterAll": "All",
+  "filterInPerson": "In-person",
+  "filterOnline": "Online",
+  "filterAllLocations": "All locations",
+  "noTrainersFound": "No trainers match this filter",
   "challengeProgressMeta": "{progress}/{goal} · {days} days left · {participants} people",
   "@challengeProgressMeta": {
     "placeholders": {
@@ -378,6 +387,30 @@
   "exerciseVideoTitle": "Video",
   "addToWorkout": "Add to workout",
   "addedToWorkoutDemo": "Added to workout (demo)",
+  "addToWorkoutTitle": "Add to workout",
+  "addToActiveWorkout": "Active workout",
+  "addToActiveWorkoutSubtitle": "Current session · {name}",
+  "@addToActiveWorkoutSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "addToSavedWorkouts": "Saved workouts",
+  "addToWorkoutEmpty": "No active session or saved workouts yet. Start or save a workout first.",
+  "addedToNamedWorkout": "Added to {name}",
+  "@addedToNamedWorkout": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "newCollection": "New collection",
+  "newCollectionSubtitle": "Create a workout to add this to",
+  "collectionNameHint": "Collection name",
+  "create": "Create",
   "gymsNearYou": "Gyms near you",
   "distanceKm": "{distance} km",
   "@distanceKm": {
@@ -551,7 +584,8 @@
     }
   },
   "finish": "Finish",
-  "skipExercise": "Skip exercise",
+  "resumeWorkout": "Resume",
+  "skipExercise": "Skip",
   "whyDidYouSkip": "Why did you skip?",
   "skipFeedback": "Skip",
   "skipReasonTooHard": "Too hard",
@@ -643,6 +677,29 @@
   "personalizationUpdatedDemo": "Personalization updated (demo)",
   "share": "Share",
   "sharedToCommunityDemo": "Shared to community (demo)",
+  "shareWorkout": "Share workout",
+  "changeBackground": "Change background",
+  "sharing": "Sharing…",
+  "shareStatDuration": "Duration",
+  "shareStatExercises": "Exercises",
+  "shareStatSets": "Sets",
+  "shareStatVolume": "Volume",
+  "shareStatDurationValue": "{minutes} min",
+  "@shareStatDurationValue": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "shareStatVolumeValue": "{kg} kg",
+  "@shareStatVolumeValue": {
+    "placeholders": {
+      "kg": {
+        "type": "String"
+      }
+    }
+  },
   "wizardSwipeBackHint": "Swipe right anytime to go back",
   "wizardSwipeBothHint": "Swipe left to continue · right to go back",
   "wizardSwipeBackOnlyHint": "Swipe right to go back",
@@ -921,5 +978,103 @@
         "type": "String"
       }
     }
-  }
+  },
+  "onboardingOffersTitle": "What PrimeGym offers",
+  "onboardingOffersSubtitle": "Everything you need to train with purpose.",
+  "onboardingOffersTrainingBody": "Custom workouts matched to your goals, schedule, and gear.",
+  "onboardingNameTitle": "What's your name?",
+  "onboardingNameSubtitle": "We'll use this to personalize your experience.",
+  "onboardingNameHint": "Your name",
+  "onboardingGoalTitle": "What are your goals?",
+  "onboardingGoalSubtitle": "Select all that apply — you can pick more than one.",
+  "goalStrength": "Strength",
+  "goalWeightLoss": "Weight loss",
+  "goalMuscleGain": "Muscle gain",
+  "onboardingFrequencyTitle": "How often do you train?",
+  "onboardingFrequencySubtitle": "Be honest — we'll build a plan you can stick to.",
+  "frequencyOnce": "Once a week",
+  "frequencyTwice": "2 times a week",
+  "frequencyThree": "3 times a week",
+  "frequencyFour": "4 times a week",
+  "frequencyFive": "5 times a week",
+  "frequencySix": "6 times a week",
+  "frequencyEveryday": "Everyday",
+  "onboardingExperienceTitle": "What's your experience?",
+  "onboardingExperienceSubtitle": "This helps us set the right intensity.",
+  "onboardingLocationTitle": "Where do you train?",
+  "onboardingLocationSubtitle": "We'll tailor sessions to your space.",
+  "locationOutdoor": "Outdoor",
+  "locationOutdoorDetail": "Parks, streets, or open air — bodyweight-friendly training.",
+  "onboardingEquipmentSelectTitle": "What equipment do you have?",
+  "onboardingEquipmentSelectSubtitle": "Select everything you can use — you can change this later.",
+  "onboardingEquipmentSelectedCount": "{count} selected",
+  "@onboardingEquipmentSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "equipmentCategoryFreeWeights": "Free weights & resistance",
+  "equipmentCategoryStructures": "Gym structures & benches",
+  "equipmentCategoryFunctional": "Functional & bodyweight tools",
+  "equipmentCategoryCardio": "Cardio equipment",
+  "equipmentCategoryCoreRecovery": "Core & recovery accessories",
+  "equipmentResistanceBands": "Resistance bands",
+  "equipmentMachines": "Machines",
+  "equipmentKettlebells": "Kettlebells",
+  "equipmentEzCurlBar": "EZ curl / specialty bars",
+  "equipmentWeightBench": "Weight bench",
+  "equipmentSquatRack": "Squat rack / power cage",
+  "equipmentPullUpBar": "Pull-up bar / dip station",
+  "equipmentCableMachine": "Cable machine",
+  "equipmentSmithMachine": "Smith machine",
+  "equipmentTrx": "TRX / suspension trainer",
+  "equipmentGymnasticRings": "Gymnastic rings",
+  "equipmentWeightVest": "Weight vest / ankle weights",
+  "equipmentPlyoBox": "Plyo box",
+  "equipmentMedicineBall": "Medicine / slam balls",
+  "equipmentSandbag": "Sandbag",
+  "equipmentTreadmill": "Treadmill",
+  "equipmentBike": "Stationary / air / spin bike",
+  "equipmentRowingMachine": "Rowing machine",
+  "equipmentSkiErg": "SkiErg",
+  "equipmentStairmaster": "Stairmaster",
+  "equipmentJumpRope": "Jump rope",
+  "equipmentAbWheel": "Ab wheel / core sliders",
+  "equipmentFoamRoller": "Foam roller / mobility tools",
+  "equipmentYogaMat": "Yoga / exercise mat",
+  "equipmentUseBodyweight": "Push-ups, squats, lunges with no gear",
+  "equipmentUseDumbbells": "Unilateral and isolation lifts",
+  "equipmentUseBarbell": "Heavy compound lifts",
+  "equipmentUseKettlebells": "Swings, cleans, carries",
+  "equipmentUseResistanceBands": "Variable resistance, assistance, rehab",
+  "equipmentUseEzCurlBar": "Arm work, trap and safety squat bars",
+  "equipmentUseWeightBench": "Pressing and supported lifts",
+  "equipmentUseSquatRack": "Safe squatting and pressing",
+  "equipmentUsePullUpBar": "Bodyweight pulling and pushing",
+  "equipmentUseMachines": "Guided, joint-friendly strength work",
+  "equipmentUseCableMachine": "Constant-tension, multi-angle work",
+  "equipmentUseSmithMachine": "Barbell on fixed rails",
+  "equipmentUseTrx": "Bodyweight resistance with straps",
+  "equipmentUseGymnasticRings": "Advanced pulling, pushing, stability",
+  "equipmentUseWeightVest": "Adds load to bodyweight movements",
+  "equipmentUsePlyoBox": "Jumps and step-ups",
+  "equipmentUseMedicineBall": "Throws, slams, rotational power",
+  "equipmentUseSandbag": "Carries, lifts, conditioning",
+  "equipmentUseTreadmill": "Walking and running",
+  "equipmentUseBike": "Low-impact cardio and intervals",
+  "equipmentUseRowingMachine": "Full-body cardio",
+  "equipmentUseSkiErg": "Upper-body-led cardio",
+  "equipmentUseStairmaster": "Stair-climbing cardio",
+  "equipmentUseJumpRope": "Portable cardio and coordination",
+  "equipmentUseAbWheel": "Core stability and anti-extension",
+  "equipmentUseFoamRoller": "Soft-tissue work and recovery",
+  "equipmentUseYogaMat": "Floor work and padding",
+  "onboardingGeneratingTitle": "Generating your workout plan",
+  "onboardingGeneratingSubtitle": "Locking in a plan built around you.",
+  "onboardingGeneratingStepGoal": "Matching your goal",
+  "onboardingGeneratingStepSchedule": "Fitting your schedule",
+  "onboardingGeneratingStepEquipment": "Selecting exercises for your gear",
+  "onboardingGeneratingStepReady": "Your plan is ready"
 }

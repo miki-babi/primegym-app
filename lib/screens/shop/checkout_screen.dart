@@ -154,7 +154,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Color(0xFFF7B84A), AppColors.accent],
+                    colors: [AppColors.accentLight, AppColors.accent],
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -166,7 +166,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
                 child: const Icon(
                   Icons.check_rounded,
-                  color: Color(0xFF1A1200),
+                  color: AppColors.onAccent,
                   size: 36,
                 ),
               ),
@@ -307,7 +307,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 product.discountPercent,
                               ),
                               style: textTheme.labelLarge?.copyWith(
-                                color: const Color(0xFF1A1200),
+                                color: AppColors.onAccent,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),

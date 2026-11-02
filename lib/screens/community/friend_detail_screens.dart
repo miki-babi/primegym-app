@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/app_store.dart';
-import '../../data/mock_data.dart';
+import '../../data/exercise_repository.dart';
 import '../../l10n/l10n_ext.dart';
 import '../../l10n/localized_string.dart';
 import '../../models/models.dart';
@@ -44,7 +44,8 @@ class ProgressPostDetailScreen extends StatelessWidget {
     final live = store.postById(post.id) ?? post;
     final exercises = [
       for (final id in live.exerciseIds)
-        if (MockData.exerciseById(id) != null) MockData.exerciseById(id)!,
+        if (ExerciseRepository.instance.exerciseById(id) != null)
+          ExerciseRepository.instance.exerciseById(id)!,
     ];
 
     return Scaffold(
@@ -1377,7 +1378,7 @@ class _WorkoutSetRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final exercise = MockData.exerciseById(set.exerciseId);
+    final exercise = ExerciseRepository.instance.exerciseById(set.exerciseId);
     final textTheme = Theme.of(context).textTheme;
     if (exercise == null) return const SizedBox.shrink();
 
@@ -1390,6 +1391,7 @@ class _WorkoutSetRow extends StatelessWidget {
           children: [
             ExerciseImage(
               assetPath: exercise.imageAsset,
+              isFile: exercise.imageIsFile,
               width: 52,
               height: 52,
               borderRadius: 12,
@@ -1436,6 +1438,7 @@ class _ExerciseRow extends StatelessWidget {
         children: [
           ExerciseImage(
             assetPath: exercise.imageAsset,
+            isFile: exercise.imageIsFile,
             width: 52,
             height: 52,
             borderRadius: 12,

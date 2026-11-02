@@ -12,13 +12,96 @@ import '../../widgets/pg_progress_bar.dart';
 import '../../widgets/section_header.dart';
 import '../../widgets/user_avatar.dart';
 
-class TrainersListScreen extends StatelessWidget {
+class TrainersListScreen extends StatefulWidget {
   const TrainersListScreen({super.key});
+
+  @override
+  State<TrainersListScreen> createState() => _TrainersListScreenState();
+}
+
+class _TrainersListScreenState extends State<TrainersListScreen> {
+  String _query = '';
+  String _mode = 'All';
+  String? _location;
+
+  List<TrainerProfile> get _filtered {
+    final q = _query.trim().toLowerCase();
+    return MockData.trainers.where((trainer) {
+      if (q.isNotEmpty &&
+          !trainer.name.toLowerCase().contains(q) &&
+          !trainer.specialization.en.toLowerCase().contains(q)) {
+        return false;
+      }
+      if (_mode == 'In-person' && !trainer.offersInPerson) return false;
+      if (_mode == 'Online' && !trainer.offersOnline) return false;
+      if (_location != null && trainer.location.en != _location) return false;
+      return true;
+    }).toList();
+  }
+
+  Widget _chipRow(List<String> labels, String selectedLabel,
+      ValueChanged<String> onSelect) {
+    final textTheme = Theme.of(context).textTheme;
+    return SizedBox(
+      height: 40,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: labels.length,
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
+        itemBuilder: (context, i) {
+          final label = labels[i];
+          final selected = selectedLabel == label;
+          return GestureDetector(
+            onTap: () => onSelect(label),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                color: selected ? AppColors.accentSoft : AppColors.surface,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: selected ? AppColors.accent : AppColors.border,
+                ),
+              ),
+              child: Text(
+                label,
+                style: textTheme.labelLarge?.copyWith(
+                  color: selected
+                      ? AppColors.accent
+                      : AppColors.textSecondary,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final l10n = context.l10n;
+    final locations = {
+      for (final trainer in MockData.trainers) trainer.location.en,
+    }.toList();
+    final modeLabels = {
+      'All': l10n.filterAll,
+      'In-person': l10n.filterInPerson,
+      'Online': l10n.filterOnline,
+    };
+    final locationLabels = {
+      for (final loc in locations) loc: MockData.trainers
+          .firstWhere((t) => t.location.en == loc)
+          .location,
+    };
+    final selectedLocationLabel = _location == null
+        ? l10n.filterAllLocations
+        : context.l10nStr(locationLabels[_location]!);
+    final list = _filtered;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,58 +114,100 @@ class TrainersListScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
         children: [
           TextField(
-            readOnly: true,
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.searchDemoOnly)),
-              );
-            },
+            onChanged: (value) => setState(() => _query = value),
             decoration: InputDecoration(
               hintText: l10n.searchTrainersHint,
               prefixIcon: const Icon(Icons.search_rounded, size: 20),
             ),
           ),
+          const SizedBox(height: 12),
+          _chipRow(
+            [l10n.filterAll, l10n.filterInPerson, l10n.filterOnline],
+            modeLabels[_mode]!,
+            (label) => setState(() => _mode = modeLabels.entries
+                .firstWhere((e) => e.value == label)
+                .key),
+          ),
+          const SizedBox(height: 8),
+          _chipRow(
+            [
+              l10n.filterAllLocations,
+              for (final loc in locations)
+                context.l10nStr(locationLabels[loc]!),
+            ],
+            selectedLocationLabel,
+            (label) => setState(() {
+              if (label == l10n.filterAllLocations) {
+                _location = null;
+              } else {
+                _location = locations.firstWhere(
+                  (loc) => context.l10nStr(locationLabels[loc]!) == label,
+                );
+              }
+            }),
+          ),
           const SizedBox(height: 20),
-          for (final trainer in MockData.trainers) ...[
+          if (list.isEmpty)
             PgCard(
-              onTap: () => context.push('/trainer/${trainer.id}'),
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  UserAvatar(name: trainer.name, size: 52),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(trainer.name, style: textTheme.titleMedium),
-                        const SizedBox(height: 4),
-                        Text(
-                          context.l10nStr(trainer.specialization),
-                          style: textTheme.bodySmall,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          l10n.trainerPricePerSession(
-                            trainer.rating,
-                            '${trainer.pricePerSessionEtb} ETB',
-                          ),
-                          style: textTheme.bodySmall?.copyWith(
-                            color: AppColors.accent,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Icon(
-                    Icons.chevron_right_rounded,
-                    color: AppColors.textMuted,
-                  ),
-                ],
+              child: Text(
+                l10n.noTrainersFound,
+                style: textTheme.bodyMedium,
               ),
-            ),
-            const SizedBox(height: 12),
-          ],
+            )
+          else
+            for (final trainer in list) ...[
+              PgCard(
+                onTap: () => context.push('/trainer/${trainer.id}'),
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    UserAvatar(name: trainer.name, size: 52),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(trainer.name, style: textTheme.titleMedium),
+                          const SizedBox(height: 4),
+                          Text(
+                            context.l10nStr(trainer.specialization),
+                            style: textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            context.l10nStr(trainer.location),
+                            style: textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 6),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  l10n.trainerPricePerSession(
+                                    trainer.rating,
+                                    '${trainer.pricePerSessionEtb} ETB',
+                                  ),
+                                  style: textTheme.bodySmall?.copyWith(
+                                    color: AppColors.accent,
+                                  ),
+                                ),
+                              ),
+                              if (trainer.offersOnline)
+                                _ModeBadge(label: l10n.filterOnline),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Icon(
+                      Icons.chevron_right_rounded,
+                      color: AppColors.textMuted,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
         ],
       ),
     );
@@ -147,6 +272,22 @@ class TrainerDetailScreen extends StatelessWidget {
             '${trainer.gym} · ${context.l10nStr(trainer.availability)}',
             style: textTheme.bodyMedium,
           ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text(
+                context.l10nStr(trainer.location),
+                style: textTheme.bodySmall,
+              ),
+              if (trainer.offersInPerson)
+                _ModeBadge(label: l10n.filterInPerson),
+              if (trainer.offersOnline)
+                _ModeBadge(label: l10n.filterOnline),
+            ],
+          ),
           const SizedBox(height: 20),
           Row(
             children: [
@@ -166,6 +307,37 @@ class TrainerDetailScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Text(context.l10nStr(trainer.bio), style: textTheme.bodyLarge),
           const SizedBox(height: 28),
+          SectionHeader(title: l10n.sectionCertifications),
+          const SizedBox(height: 12),
+          for (final cert in trainer.certifications) ...[
+            Row(
+              children: [
+                const Icon(
+                  Icons.verified_rounded,
+                  color: AppColors.accent,
+                  size: 20,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(cert.name, style: textTheme.titleSmall),
+                      const SizedBox(height: 2),
+                      Text(
+                        cert.year == null
+                            ? cert.issuer
+                            : '${cert.issuer} · ${cert.year}',
+                        style: textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+          ],
+          const SizedBox(height: 18),
           SectionHeader(title: l10n.sectionPrograms),
           const SizedBox(height: 12),
           for (final program in trainer.programs) ...[
@@ -184,6 +356,40 @@ class TrainerDetailScreen extends StatelessWidget {
                       context.l10nStr(program),
                       style: textTheme.titleSmall,
                     ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+          ],
+          const SizedBox(height: 18),
+          SectionHeader(title: l10n.sectionTestimonials),
+          const SizedBox(height: 12),
+          for (final testimonial in trainer.testimonials) ...[
+            PgCard(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        testimonial.author,
+                        style: textTheme.titleSmall,
+                      ),
+                      const Spacer(),
+                      Text(
+                        '${testimonial.rating} ★',
+                        style: textTheme.bodySmall?.copyWith(
+                          color: AppColors.accent,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    context.l10nStr(testimonial.text),
+                    style: textTheme.bodyMedium,
                   ),
                 ],
               ),
@@ -505,6 +711,29 @@ class _ChallengeCard extends StatelessWidget {
             style: textTheme.bodySmall,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ModeBadge extends StatelessWidget {
+  const _ModeBadge({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: AppColors.accentSoft,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: AppColors.accent,
+            ),
       ),
     );
   }

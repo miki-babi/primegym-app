@@ -1,9 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../l10n/localized_string.dart';
 import '../models/models.dart';
+import 'exercise_repository.dart';
 import 'mock_data.dart';
+import 'workout_catalog.dart';
 
 class AppStore extends ChangeNotifier {
   AppStore._() {
@@ -13,11 +18,16 @@ class AppStore extends ChangeNotifier {
   static final AppStore instance = AppStore._();
 
   static const _savedPlansPrefsKey = 'primegym_saved_workout_plans';
+  static const _customCollectionsPrefsKey = 'primegym_custom_collections';
 
   late List<FeedPost> _feed;
   final Set<String> _savedWorkoutSessionIds = {};
   final Set<String> _savedWorkoutPlanIds = {};
   final Set<String> _followedFriends = {};
+  /// In-session extras: workout plan id → exercise ids added from detail.
+  final Map<String, List<String>> _exercisesAddedToPlans = {};
+  /// User-created workout collections (persisted), newest first.
+  final List<_CustomCollection> _customCollections = [];
 
   List<FeedPost> get feed => List.unmodifiable(_feed);
 
@@ -26,10 +36,28 @@ class AppStore extends ChangeNotifier {
   static Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     final stored = prefs.getStringList(_savedPlansPrefsKey);
-    if (stored == null || stored.isEmpty) return;
-    instance._savedWorkoutPlanIds
-      ..clear()
-      ..addAll(stored);
+    if (stored != null && stored.isNotEmpty) {
+      instance._savedWorkoutPlanIds
+        ..clear()
+        ..addAll(stored);
+    }
+    final collectionsJson = prefs.getString(_customCollectionsPrefsKey);
+    if (collectionsJson != null && collectionsJson.isNotEmpty) {
+      try {
+        final decoded = jsonDecode(collectionsJson);
+        if (decoded is List) {
+          instance._customCollections
+            ..clear()
+            ..addAll([
+              for (final entry in decoded)
+                if (entry is Map<String, dynamic>)
+                  _CustomCollection.fromJson(entry),
+            ]);
+        }
+      } on FormatException {
+        // Ignore corrupted persisted data.
+      }
+    }
   }
 
   Future<void> _persistSavedPlans() async {
@@ -37,6 +65,16 @@ class AppStore extends ChangeNotifier {
     await prefs.setStringList(
       _savedPlansPrefsKey,
       _savedWorkoutPlanIds.toList(growable: false),
+    );
+  }
+
+  Future<void> _persistCustomCollections() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      _customCollectionsPrefsKey,
+      jsonEncode([
+        for (final c in _customCollections) c.toJson(),
+      ]),
     );
   }
 
@@ -56,9 +94,10 @@ class AppStore extends ChangeNotifier {
   }
 
   bool isWorkoutPlanSaved(String workoutId) =>
-      _savedWorkoutPlanIds.contains(workoutId);
+      isCustomPlan(workoutId) || _savedWorkoutPlanIds.contains(workoutId);
 
   Future<bool> toggleSavedWorkoutPlan(String workoutId) async {
+    if (isCustomPlan(workoutId)) return true;
     final added = _savedWorkoutPlanIds.add(workoutId);
     if (!added) {
       _savedWorkoutPlanIds.remove(workoutId);
@@ -68,11 +107,81 @@ class AppStore extends ChangeNotifier {
     return added;
   }
 
+  bool isCustomPlan(String workoutId) =>
+      _customCollections.any((c) => c.id == workoutId);
+
+  /// Creates a persisted workout collection and returns its plan.
+  WorkoutPlan createCollection(String name, {String? exerciseId}) {
+    final collection = _CustomCollection(
+      id: 'custom-${DateTime.now().microsecondsSinceEpoch}',
+      name: name.trim(),
+      exerciseIds: [
+        if (exerciseId != null && exerciseId.isNotEmpty) exerciseId,
+      ],
+    );
+    _customCollections.insert(0, collection);
+    notifyListeners();
+    unawaited(_persistCustomCollections());
+    return _planForCollection(collection);
+  }
+
+  /// Resolves a workout plan by id, checking custom collections first.
+  WorkoutPlan? workoutPlanById(String id) {
+    for (final c in _customCollections) {
+      if (c.id == id) return _planForCollection(c);
+    }
+    return MockData.workoutById(id);
+  }
+
+  WorkoutPlan _planForCollection(_CustomCollection collection) {
+    final exercises = <WorkoutExercise>[];
+    final seenMuscles = <String>{};
+    final muscles = <LocalizedString>[];
+    for (final id in collection.exerciseIds) {
+      final item = ExerciseRepository.instance.exerciseById(id);
+      if (item == null) continue;
+      exercises.add(WorkoutCatalog.defaultExercisePrescription(item));
+      if (seenMuscles.add(item.muscle.en)) muscles.add(item.muscle);
+    }
+    final name = collection.name;
+    return WorkoutPlan(
+      id: collection.id,
+      title: LocalizedString(en: name, am: name, om: name),
+      durationMinutes: exercises.isEmpty ? 10 : 5 + exercises.length * 5,
+      level: const LocalizedString(en: 'Custom', am: 'ብጁ', om: 'Custom'),
+      muscles: muscles,
+      exercises: exercises,
+      owner: MockData.currentUser,
+    );
+  }
+
   List<WorkoutPlan> savedWorkoutPlans() {
     return [
+      for (final c in _customCollections) _planForCollection(c),
       for (final id in _savedWorkoutPlanIds)
         if (MockData.workoutById(id) != null) MockData.workoutById(id)!,
     ];
+  }
+
+  List<String> exercisesAddedToPlan(String workoutId) =>
+      List.unmodifiable(_exercisesAddedToPlans[workoutId] ?? const []);
+
+  bool recordExerciseAddedToPlan(String workoutId, String exerciseId) {
+    if (workoutId.isEmpty || exerciseId.isEmpty) return false;
+    for (final c in _customCollections) {
+      if (c.id == workoutId) {
+        if (c.exerciseIds.contains(exerciseId)) return false;
+        c.exerciseIds.add(exerciseId);
+        notifyListeners();
+        unawaited(_persistCustomCollections());
+        return true;
+      }
+    }
+    final list = _exercisesAddedToPlans.putIfAbsent(workoutId, () => []);
+    if (list.contains(exerciseId)) return false;
+    list.add(exerciseId);
+    notifyListeners();
+    return true;
   }
 
   bool isFollowing(String name) => _followedFriends.contains(name);
@@ -167,7 +276,8 @@ class AppStore extends ChangeNotifier {
     };
     final exercises = [
       for (final id in ids)
-        if (MockData.exerciseById(id) != null) MockData.exerciseById(id)!,
+        if (ExerciseRepository.instance.exerciseById(id) != null)
+          ExerciseRepository.instance.exerciseById(id)!,
     ];
 
     return FriendProfile(
@@ -223,5 +333,36 @@ class AppStore extends ChangeNotifier {
     final hash = name.hashCode.abs();
     return ((hash % challenge.goal) + challenge.progress ~/ 2)
         .clamp(1, challenge.goal);
+  }
+}
+
+/// Persisted user-created workout collection. Exercises are stored as ids and
+/// resolved lazily against the exercise catalog when a plan is built.
+class _CustomCollection {
+  _CustomCollection({
+    required this.id,
+    required this.name,
+    List<String>? exerciseIds,
+  }) : exerciseIds = exerciseIds ?? [];
+
+  final String id;
+  final String name;
+  final List<String> exerciseIds;
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'exerciseIds': exerciseIds,
+      };
+
+  factory _CustomCollection.fromJson(Map<String, dynamic> json) {
+    return _CustomCollection(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      exerciseIds: [
+        for (final e in (json['exerciseIds'] as List? ?? const []))
+          if (e is String) e,
+      ],
+    );
   }
 }

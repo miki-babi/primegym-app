@@ -176,13 +176,19 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
             Row(
               children: [
-                const UserAvatar(name: MockData.currentUser, size: 72),
+                UserAvatar(
+                  name: UserPreferences.instance.resolvedDisplayName,
+                  size: 72,
+                ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(MockData.currentUser, style: textTheme.headlineSmall),
+                      Text(
+                        UserPreferences.instance.resolvedDisplayName,
+                        style: textTheme.headlineSmall,
+                      ),
                       const SizedBox(height: 4),
                       Text(
                         l10n.profileLevelIntermediate(MockData.level),

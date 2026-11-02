@@ -8,11 +8,12 @@ abstract final class AppBorders {
   /// Continuous corner radius (reads softer / more iOS than circular).
   static const double continuousControlRadius = 28;
 
-  /// iOS dark separator / outline.
-  static const Color separator = Color(0xFF38383A);
+  /// Warm olive separator / outline.
+  static const Color separator = Color(0xFF7B7457);
 
-  /// Soft white rim used on filled controls.
-  static Color get filledRim => Colors.white.withValues(alpha: 0.18);
+  /// Soft rim used on filled controls.
+  static Color get filledRim =>
+      const Color(0xFF854627).withValues(alpha: 0.12);
 
   static double hairlineWidth(BuildContext context) {
     final dpr = MediaQuery.devicePixelRatioOf(context);

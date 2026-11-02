@@ -66,9 +66,9 @@ class GlassyCircleButton extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white.withValues(alpha: 0.1),
+            color: AppColors.surface.withValues(alpha: 0.88),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.16),
+              color: AppColors.border.withValues(alpha: 0.35),
             ),
             boxShadow: [
               BoxShadow(

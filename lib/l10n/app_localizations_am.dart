@@ -30,6 +30,12 @@ class AppLocalizationsAm extends AppLocalizations {
   String get onboardingContinue => 'ቀጥል';
 
   @override
+  String get onboardingNext => 'ቀጣይ';
+
+  @override
+  String get onboardingSkip => 'ዝለል';
+
+  @override
   String get onboardingEnterHome => 'ወደ መነሻ ግባ';
 
   @override
@@ -518,7 +524,13 @@ class AppLocalizationsAm extends AppLocalizations {
   String get sectionPrograms => 'ፕሮግራሞች';
 
   @override
-  String get bookDemo => 'ይያዙ (ማሳያ)';
+  String get sectionCertifications => 'የምስክር ወረቀቶች';
+
+  @override
+  String get sectionTestimonials => 'የደንበኞች አስተያየቶች';
+
+  @override
+  String get bookDemo => 'ይያዙ';
 
   @override
   String get bookingDemoOnly => 'ቦታ ማስያዝ ማሳያ ብቻ ነው';
@@ -553,6 +565,21 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get noChallengesInFilter => 'በዚህ ማጣሪያ ፈተናዎች የሉም';
+
+  @override
+  String get filterAll => 'ሁሉም';
+
+  @override
+  String get filterInPerson => 'በአካል';
+
+  @override
+  String get filterOnline => 'መስመር ላይ';
+
+  @override
+  String get filterAllLocations => 'ሁሉም ቦታዎች';
+
+  @override
+  String get noTrainersFound => 'ከዚህ ማጣሪያ ጋር የሚዛመዱ አሰልጣኞች የሉም';
 
   @override
   String challengeProgressMeta(
@@ -591,6 +618,41 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get addedToWorkoutDemo => 'ወደ ልምምድ ተጨምሯል (ማሳያ)';
+
+  @override
+  String get addToWorkoutTitle => 'ወደ ልምምድ ጨምር';
+
+  @override
+  String get addToActiveWorkout => 'ንቁ ልምምድ';
+
+  @override
+  String addToActiveWorkoutSubtitle(String name) {
+    return 'አሁን ያለ ክፍለ ጊዜ · $name';
+  }
+
+  @override
+  String get addToSavedWorkouts => 'የተቀመጡ ልምምዶች';
+
+  @override
+  String get addToWorkoutEmpty =>
+      'ንቁ ክፍለ ጊዜ ወይም የተቀመጠ ልምምድ የለም። መጀመሪያ ይጀምሩ ወይም ያስቀምጡ።';
+
+  @override
+  String addedToNamedWorkout(String name) {
+    return 'ወደ $name ተጨምሯል';
+  }
+
+  @override
+  String get newCollection => 'አዲስ ስብስብ';
+
+  @override
+  String get newCollectionSubtitle => 'ይህን ለመጨመር ልምምድ ይፍጠሩ';
+
+  @override
+  String get collectionNameHint => 'የስብስብ ስም';
+
+  @override
+  String get create => 'ፍጠር';
 
   @override
   String get gymsNearYou => 'አቅራቢያ ያሉ ጂሞች';
@@ -745,7 +807,10 @@ class AppLocalizationsAm extends AppLocalizations {
   String get finish => 'ጨርስ';
 
   @override
-  String get skipExercise => 'ልምምድ ዝለል';
+  String get resumeWorkout => 'ቀጥል';
+
+  @override
+  String get skipExercise => 'ዝለል';
 
   @override
   String get whyDidYouSkip => 'ለምን ዘለሉ?';
@@ -831,6 +896,37 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get sharedToCommunityDemo => 'ለማህበረሰብ ተጋርቷል (ማሳያ)';
+
+  @override
+  String get shareWorkout => 'ልምምድ አጋራ';
+
+  @override
+  String get changeBackground => 'ዳራ ቀይር';
+
+  @override
+  String get sharing => 'በማጋራት ላይ…';
+
+  @override
+  String get shareStatDuration => 'ጊዜ';
+
+  @override
+  String get shareStatExercises => 'ልምምዶች';
+
+  @override
+  String get shareStatSets => 'ስብስቦች';
+
+  @override
+  String get shareStatVolume => 'መጠን';
+
+  @override
+  String shareStatDurationValue(int minutes) {
+    return '$minutes ደቂቃ';
+  }
+
+  @override
+  String shareStatVolumeValue(String kg) {
+    return '$kg ኪግ';
+  }
 
   @override
   String get wizardSwipeBackHint => 'ለመመለስ ወደ ቀኝ ያንሸራቱ';
@@ -1283,4 +1379,283 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get onboardingPlanReadyBadge => 'ለእርስዎ የተዘጋጀ';
+
+  @override
+  String get onboardingOffersTitle => 'PrimeGym የሚያቀርበው';
+
+  @override
+  String get onboardingOffersSubtitle => 'በዓላማ ለመለማመድ የሚያስፈልጎዎ ሁሉ።';
+
+  @override
+  String get onboardingOffersTrainingBody =>
+      'ከግቦችዎ፣ መርሃ ግብርዎ እና መሳሪያዎ ጋር የሚስማሙ ግላዊ ልምምዶች።';
+
+  @override
+  String get onboardingNameTitle => 'ስምዎ ማን ነው?';
+
+  @override
+  String get onboardingNameSubtitle => 'ተሞክሮዎን ለግል ለማድረግ ይህን እንጠቀማለን።';
+
+  @override
+  String get onboardingNameHint => 'ስምዎ';
+
+  @override
+  String get onboardingGoalTitle => 'ግቦችዎ ምንድን ናቸው?';
+
+  @override
+  String get onboardingGoalSubtitle => 'የሚመለከቱትን ሁሉ ይምረጡ — ከአንድ በላይ መምረጥ ይችላሉ።';
+
+  @override
+  String get goalStrength => 'ጉልበት';
+
+  @override
+  String get goalWeightLoss => 'ክብደት መቀነስ';
+
+  @override
+  String get goalMuscleGain => 'ጡንቻ መገመር';
+
+  @override
+  String get onboardingFrequencyTitle => 'በሳምንት ስንት ጊዜ ይለማመዳሉ?';
+
+  @override
+  String get onboardingFrequencySubtitle =>
+      'እውነተኛ ይሁኑ — ሊጣበቁበት የሚችሉትን እቅድ እንገነባለን።';
+
+  @override
+  String get frequencyOnce => 'በሳምንት አንድ ጊዜ';
+
+  @override
+  String get frequencyTwice => 'በሳምንት 2 ጊዜ';
+
+  @override
+  String get frequencyThree => 'በሳምንት 3 ጊዜ';
+
+  @override
+  String get frequencyFour => 'በሳምንት 4 ጊዜ';
+
+  @override
+  String get frequencyFive => 'በሳምንት 5 ጊዜ';
+
+  @override
+  String get frequencySix => 'በሳምንት 6 ጊዜ';
+
+  @override
+  String get frequencyEveryday => 'በየቀኑ';
+
+  @override
+  String get onboardingExperienceTitle => 'ልምድዎ ምንድን ነው?';
+
+  @override
+  String get onboardingExperienceSubtitle => 'ትክክለኛውን ጥንካሬ ለማስተካከል ይረዳናል።';
+
+  @override
+  String get onboardingLocationTitle => 'የት ይለማመዳሉ?';
+
+  @override
+  String get onboardingLocationSubtitle => 'ክፍለ ጊዜዎችን ለቦታዎ እናስተካክላለን።';
+
+  @override
+  String get locationOutdoor => 'ውጭ';
+
+  @override
+  String get locationOutdoorDetail =>
+      'ፓርኮች፣ መንገዶች ወይም ክፍት አየር — ለሰውነት ክብደት ምቹ ስልጠና።';
+
+  @override
+  String get onboardingEquipmentSelectTitle => 'ምን መሳሪያ አለዎት?';
+
+  @override
+  String get onboardingEquipmentSelectSubtitle =>
+      'ሊጠቀሙባቸው የሚችሉትን ሁሉ ይምረጡ — በኋላ መቀየር ይችላሉ።';
+
+  @override
+  String onboardingEquipmentSelectedCount(int count) {
+    return '$count ተመርጠዋል';
+  }
+
+  @override
+  String get equipmentCategoryFreeWeights => 'ነጻ ክብደቶች እና መቋቋሚያ';
+
+  @override
+  String get equipmentCategoryStructures => 'የጂም አወቃቀሮች እና ቤንቾች';
+
+  @override
+  String get equipmentCategoryFunctional => 'ተግባራዊ እና የሰውነት ክብደት መሣሪያዎች';
+
+  @override
+  String get equipmentCategoryCardio => 'የካርዲዮ መሣሪያ';
+
+  @override
+  String get equipmentCategoryCoreRecovery => 'ኮር እና ማገገሚያ ተጨማሪዎች';
+
+  @override
+  String get equipmentResistanceBands => 'የመ቉቉ም ባንዶች';
+
+  @override
+  String get equipmentMachines => 'ማሽኖች';
+
+  @override
+  String get equipmentKettlebells => 'ኬትልቤሎች';
+
+  @override
+  String get equipmentEzCurlBar => 'EZ ኩርል / ልዩ ባሮች';
+
+  @override
+  String get equipmentWeightBench => 'የክብደት ቤንች';
+
+  @override
+  String get equipmentSquatRack => 'ስኳት ራክ / ፓወር ኬጅ';
+
+  @override
+  String get equipmentPullUpBar => 'ፑል-አፕ ባር / ዲፕ ስቴሽን';
+
+  @override
+  String get equipmentCableMachine => 'ኬብል ማሽን';
+
+  @override
+  String get equipmentSmithMachine => 'ስሚዝ ማሽን';
+
+  @override
+  String get equipmentTrx => 'TRX / ሰስፐንሽን ትሬነር';
+
+  @override
+  String get equipmentGymnasticRings => 'የጂምናስቲክ ቀለበቶች';
+
+  @override
+  String get equipmentWeightVest => 'የክብደት ቬስት / የቁርጭምጭሚት ክብደት';
+
+  @override
+  String get equipmentPlyoBox => 'ፕላዮ ቦክስ';
+
+  @override
+  String get equipmentMedicineBall => 'ሜዲሲን / ስላም ቦል';
+
+  @override
+  String get equipmentSandbag => 'የአሸዋ ቦርሳ';
+
+  @override
+  String get equipmentTreadmill => 'ትሬድሚል';
+
+  @override
+  String get equipmentBike => 'ቋሚ / አየር / ስፒን ብስክሌት';
+
+  @override
+  String get equipmentRowingMachine => 'የሮዊንግ ማሽን';
+
+  @override
+  String get equipmentSkiErg => 'SkiErg';
+
+  @override
+  String get equipmentStairmaster => 'ስቴርማስተር';
+
+  @override
+  String get equipmentJumpRope => 'የዝላይ ገመድ';
+
+  @override
+  String get equipmentAbWheel => 'አብ ዊል / ኮር ስላይደሮች';
+
+  @override
+  String get equipmentFoamRoller => 'ፎም ሮለር / የመንቀሳቀስ መሣሪያ';
+
+  @override
+  String get equipmentYogaMat => 'የዮጋ / ልምምድ ምንጣፍ';
+
+  @override
+  String get equipmentUseBodyweight => 'ያለ መሣሪያ ፑሽ-አፕ፣ ስኳት፣ ላንጅ';
+
+  @override
+  String get equipmentUseDumbbells => 'አንድ-ጎን እና ማግለል ሊፍቶች';
+
+  @override
+  String get equipmentUseBarbell => 'ከባድ ውህድ ሊፍቶች';
+
+  @override
+  String get equipmentUseKettlebells => 'ስዊንግ፣ ክሊን፣ ካሪ';
+
+  @override
+  String get equipmentUseResistanceBands => 'ተለዋዋጭ መቋቋሚያ፣ እገዛ፣ ማገገሚያ';
+
+  @override
+  String get equipmentUseEzCurlBar => 'የእጅ ሥራ፣ ትራፕ እና ሴፍቲ ስኳት ባሮች';
+
+  @override
+  String get equipmentUseWeightBench => 'መጫን እና የተደገፉ ሊፍቶች';
+
+  @override
+  String get equipmentUseSquatRack => 'ደህንነቱ የተጠበቀ ስኳት እና መጫን';
+
+  @override
+  String get equipmentUsePullUpBar => 'የሰውነት ክብደት መሳብ እና መግፋት';
+
+  @override
+  String get equipmentUseMachines => 'የተመራ፣ ለመገጣጠሚያ ተስማሚ ጥንካሬ';
+
+  @override
+  String get equipmentUseCableMachine => 'ቋሚ ውጥረት፣ ብዙ-አንግል ሥራ';
+
+  @override
+  String get equipmentUseSmithMachine => 'ባርቤል በቋሚ ሐዲድ ላይ';
+
+  @override
+  String get equipmentUseTrx => 'የሰውነት ክብደት መቋቋሚያ በማሰሪያ';
+
+  @override
+  String get equipmentUseGymnasticRings => 'የላቀ መሳብ፣ መግፋት፣ መረጋጋት';
+
+  @override
+  String get equipmentUseWeightVest => 'በሰውነት እንቅስቃሴ ላይ ክብደት ይጨምራል';
+
+  @override
+  String get equipmentUsePlyoBox => 'ዝላይ እና ስቴፕ-አፕ';
+
+  @override
+  String get equipmentUseMedicineBall => 'መወርወር፣ ስላም፣ የማሽከርከር ኃይል';
+
+  @override
+  String get equipmentUseSandbag => 'ካሪ፣ ሊፍት፣ ኮንዲሽኒንግ';
+
+  @override
+  String get equipmentUseTreadmill => 'መራመድ እና መሮጥ';
+
+  @override
+  String get equipmentUseBike => 'ዝቅተኛ-ተጽዕኖ ካርዲዮ እና ኢንተርቫል';
+
+  @override
+  String get equipmentUseRowingMachine => 'ሙሉ-ሰውነት ካርዲዮ';
+
+  @override
+  String get equipmentUseSkiErg => 'በላይኛው አካል የሚመራ ካርዲዮ';
+
+  @override
+  String get equipmentUseStairmaster => 'የደረጃ መውጣት ካርዲዮ';
+
+  @override
+  String get equipmentUseJumpRope => 'ተንቀሳቃሽ ካርዲዮ እና ቅንጅት';
+
+  @override
+  String get equipmentUseAbWheel => 'የኮር መረጋጋት እና ፀረ-ማራዘም';
+
+  @override
+  String get equipmentUseFoamRoller => 'ለስላሳ ሕብረ ሕዋስ ሥራ እና ማገገሚያ';
+
+  @override
+  String get equipmentUseYogaMat => 'የወለል ሥራ እና መከላከያ';
+
+  @override
+  String get onboardingGeneratingTitle => 'የልምምድ እቅድዎን በማመንገት ላይ';
+
+  @override
+  String get onboardingGeneratingSubtitle => 'ለእርስዎ የተገነባ እቅድ እያስተካከልን ነው።';
+
+  @override
+  String get onboardingGeneratingStepGoal => 'ግብዎን በማዛመድ ላይ';
+
+  @override
+  String get onboardingGeneratingStepSchedule => 'መርሃ ግብርዎን በማስተካከል ላይ';
+
+  @override
+  String get onboardingGeneratingStepEquipment => 'ለመሳሪያዎ ልምምዶችን በመምረጥ ላይ';
+
+  @override
+  String get onboardingGeneratingStepReady => 'እቅድዎ ዝግጁ ነው';
 }

@@ -73,7 +73,7 @@ class PgButton extends StatelessWidget {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFFF7B84A), AppColors.accent],
+                colors: [AppColors.accentLight, AppColors.accent],
               ),
               shadows: enabled
                   ? [
@@ -142,8 +142,9 @@ class PgButton extends StatelessWidget {
   }
 
   Color get _foreground => switch (variant) {
-        PgButtonVariant.primary => const Color(0xFF1A1200),
-        PgButtonVariant.secondary => AppColors.accent,
+        PgButtonVariant.primary => AppColors.onAccent,
+        // Soft accent fill on dark surfaces — white label for contrast.
+        PgButtonVariant.secondary => AppColors.textPrimary,
         PgButtonVariant.ghost => AppColors.textSecondary,
       };
 }

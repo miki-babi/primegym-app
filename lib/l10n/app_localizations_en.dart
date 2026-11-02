@@ -30,6 +30,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingContinue => 'Continue';
 
   @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
   String get onboardingEnterHome => 'Enter home';
 
   @override
@@ -525,7 +531,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectionPrograms => 'Programs';
 
   @override
-  String get bookDemo => 'Book (demo)';
+  String get sectionCertifications => 'Certifications';
+
+  @override
+  String get sectionTestimonials => 'Testimonials';
+
+  @override
+  String get bookDemo => 'Book';
 
   @override
   String get bookingDemoOnly => 'Booking is demo-only';
@@ -560,6 +572,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noChallengesInFilter => 'No challenges in this filter';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterInPerson => 'In-person';
+
+  @override
+  String get filterOnline => 'Online';
+
+  @override
+  String get filterAllLocations => 'All locations';
+
+  @override
+  String get noTrainersFound => 'No trainers match this filter';
 
   @override
   String challengeProgressMeta(
@@ -598,6 +625,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addedToWorkoutDemo => 'Added to workout (demo)';
+
+  @override
+  String get addToWorkoutTitle => 'Add to workout';
+
+  @override
+  String get addToActiveWorkout => 'Active workout';
+
+  @override
+  String addToActiveWorkoutSubtitle(String name) {
+    return 'Current session · $name';
+  }
+
+  @override
+  String get addToSavedWorkouts => 'Saved workouts';
+
+  @override
+  String get addToWorkoutEmpty =>
+      'No active session or saved workouts yet. Start or save a workout first.';
+
+  @override
+  String addedToNamedWorkout(String name) {
+    return 'Added to $name';
+  }
+
+  @override
+  String get newCollection => 'New collection';
+
+  @override
+  String get newCollectionSubtitle => 'Create a workout to add this to';
+
+  @override
+  String get collectionNameHint => 'Collection name';
+
+  @override
+  String get create => 'Create';
 
   @override
   String get gymsNearYou => 'Gyms near you';
@@ -752,7 +814,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finish => 'Finish';
 
   @override
-  String get skipExercise => 'Skip exercise';
+  String get resumeWorkout => 'Resume';
+
+  @override
+  String get skipExercise => 'Skip';
 
   @override
   String get whyDidYouSkip => 'Why did you skip?';
@@ -838,6 +903,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sharedToCommunityDemo => 'Shared to community (demo)';
+
+  @override
+  String get shareWorkout => 'Share workout';
+
+  @override
+  String get changeBackground => 'Change background';
+
+  @override
+  String get sharing => 'Sharing…';
+
+  @override
+  String get shareStatDuration => 'Duration';
+
+  @override
+  String get shareStatExercises => 'Exercises';
+
+  @override
+  String get shareStatSets => 'Sets';
+
+  @override
+  String get shareStatVolume => 'Volume';
+
+  @override
+  String shareStatDurationValue(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String shareStatVolumeValue(String kg) {
+    return '$kg kg';
+  }
 
   @override
   String get wizardSwipeBackHint => 'Swipe right anytime to go back';
@@ -1290,4 +1386,292 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingPlanReadyBadge => 'Personalized for you';
+
+  @override
+  String get onboardingOffersTitle => 'What PrimeGym offers';
+
+  @override
+  String get onboardingOffersSubtitle =>
+      'Everything you need to train with purpose.';
+
+  @override
+  String get onboardingOffersTrainingBody =>
+      'Custom workouts matched to your goals, schedule, and gear.';
+
+  @override
+  String get onboardingNameTitle => 'What\'s your name?';
+
+  @override
+  String get onboardingNameSubtitle =>
+      'We\'ll use this to personalize your experience.';
+
+  @override
+  String get onboardingNameHint => 'Your name';
+
+  @override
+  String get onboardingGoalTitle => 'What are your goals?';
+
+  @override
+  String get onboardingGoalSubtitle =>
+      'Select all that apply — you can pick more than one.';
+
+  @override
+  String get goalStrength => 'Strength';
+
+  @override
+  String get goalWeightLoss => 'Weight loss';
+
+  @override
+  String get goalMuscleGain => 'Muscle gain';
+
+  @override
+  String get onboardingFrequencyTitle => 'How often do you train?';
+
+  @override
+  String get onboardingFrequencySubtitle =>
+      'Be honest — we\'ll build a plan you can stick to.';
+
+  @override
+  String get frequencyOnce => 'Once a week';
+
+  @override
+  String get frequencyTwice => '2 times a week';
+
+  @override
+  String get frequencyThree => '3 times a week';
+
+  @override
+  String get frequencyFour => '4 times a week';
+
+  @override
+  String get frequencyFive => '5 times a week';
+
+  @override
+  String get frequencySix => '6 times a week';
+
+  @override
+  String get frequencyEveryday => 'Everyday';
+
+  @override
+  String get onboardingExperienceTitle => 'What\'s your experience?';
+
+  @override
+  String get onboardingExperienceSubtitle =>
+      'This helps us set the right intensity.';
+
+  @override
+  String get onboardingLocationTitle => 'Where do you train?';
+
+  @override
+  String get onboardingLocationSubtitle =>
+      'We\'ll tailor sessions to your space.';
+
+  @override
+  String get locationOutdoor => 'Outdoor';
+
+  @override
+  String get locationOutdoorDetail =>
+      'Parks, streets, or open air — bodyweight-friendly training.';
+
+  @override
+  String get onboardingEquipmentSelectTitle => 'What equipment do you have?';
+
+  @override
+  String get onboardingEquipmentSelectSubtitle =>
+      'Select everything you can use — you can change this later.';
+
+  @override
+  String onboardingEquipmentSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get equipmentCategoryFreeWeights => 'Free weights & resistance';
+
+  @override
+  String get equipmentCategoryStructures => 'Gym structures & benches';
+
+  @override
+  String get equipmentCategoryFunctional => 'Functional & bodyweight tools';
+
+  @override
+  String get equipmentCategoryCardio => 'Cardio equipment';
+
+  @override
+  String get equipmentCategoryCoreRecovery => 'Core & recovery accessories';
+
+  @override
+  String get equipmentResistanceBands => 'Resistance bands';
+
+  @override
+  String get equipmentMachines => 'Machines';
+
+  @override
+  String get equipmentKettlebells => 'Kettlebells';
+
+  @override
+  String get equipmentEzCurlBar => 'EZ curl / specialty bars';
+
+  @override
+  String get equipmentWeightBench => 'Weight bench';
+
+  @override
+  String get equipmentSquatRack => 'Squat rack / power cage';
+
+  @override
+  String get equipmentPullUpBar => 'Pull-up bar / dip station';
+
+  @override
+  String get equipmentCableMachine => 'Cable machine';
+
+  @override
+  String get equipmentSmithMachine => 'Smith machine';
+
+  @override
+  String get equipmentTrx => 'TRX / suspension trainer';
+
+  @override
+  String get equipmentGymnasticRings => 'Gymnastic rings';
+
+  @override
+  String get equipmentWeightVest => 'Weight vest / ankle weights';
+
+  @override
+  String get equipmentPlyoBox => 'Plyo box';
+
+  @override
+  String get equipmentMedicineBall => 'Medicine / slam balls';
+
+  @override
+  String get equipmentSandbag => 'Sandbag';
+
+  @override
+  String get equipmentTreadmill => 'Treadmill';
+
+  @override
+  String get equipmentBike => 'Stationary / air / spin bike';
+
+  @override
+  String get equipmentRowingMachine => 'Rowing machine';
+
+  @override
+  String get equipmentSkiErg => 'SkiErg';
+
+  @override
+  String get equipmentStairmaster => 'Stairmaster';
+
+  @override
+  String get equipmentJumpRope => 'Jump rope';
+
+  @override
+  String get equipmentAbWheel => 'Ab wheel / core sliders';
+
+  @override
+  String get equipmentFoamRoller => 'Foam roller / mobility tools';
+
+  @override
+  String get equipmentYogaMat => 'Yoga / exercise mat';
+
+  @override
+  String get equipmentUseBodyweight => 'Push-ups, squats, lunges with no gear';
+
+  @override
+  String get equipmentUseDumbbells => 'Unilateral and isolation lifts';
+
+  @override
+  String get equipmentUseBarbell => 'Heavy compound lifts';
+
+  @override
+  String get equipmentUseKettlebells => 'Swings, cleans, carries';
+
+  @override
+  String get equipmentUseResistanceBands =>
+      'Variable resistance, assistance, rehab';
+
+  @override
+  String get equipmentUseEzCurlBar => 'Arm work, trap and safety squat bars';
+
+  @override
+  String get equipmentUseWeightBench => 'Pressing and supported lifts';
+
+  @override
+  String get equipmentUseSquatRack => 'Safe squatting and pressing';
+
+  @override
+  String get equipmentUsePullUpBar => 'Bodyweight pulling and pushing';
+
+  @override
+  String get equipmentUseMachines => 'Guided, joint-friendly strength work';
+
+  @override
+  String get equipmentUseCableMachine => 'Constant-tension, multi-angle work';
+
+  @override
+  String get equipmentUseSmithMachine => 'Barbell on fixed rails';
+
+  @override
+  String get equipmentUseTrx => 'Bodyweight resistance with straps';
+
+  @override
+  String get equipmentUseGymnasticRings =>
+      'Advanced pulling, pushing, stability';
+
+  @override
+  String get equipmentUseWeightVest => 'Adds load to bodyweight movements';
+
+  @override
+  String get equipmentUsePlyoBox => 'Jumps and step-ups';
+
+  @override
+  String get equipmentUseMedicineBall => 'Throws, slams, rotational power';
+
+  @override
+  String get equipmentUseSandbag => 'Carries, lifts, conditioning';
+
+  @override
+  String get equipmentUseTreadmill => 'Walking and running';
+
+  @override
+  String get equipmentUseBike => 'Low-impact cardio and intervals';
+
+  @override
+  String get equipmentUseRowingMachine => 'Full-body cardio';
+
+  @override
+  String get equipmentUseSkiErg => 'Upper-body-led cardio';
+
+  @override
+  String get equipmentUseStairmaster => 'Stair-climbing cardio';
+
+  @override
+  String get equipmentUseJumpRope => 'Portable cardio and coordination';
+
+  @override
+  String get equipmentUseAbWheel => 'Core stability and anti-extension';
+
+  @override
+  String get equipmentUseFoamRoller => 'Soft-tissue work and recovery';
+
+  @override
+  String get equipmentUseYogaMat => 'Floor work and padding';
+
+  @override
+  String get onboardingGeneratingTitle => 'Generating your workout plan';
+
+  @override
+  String get onboardingGeneratingSubtitle =>
+      'Locking in a plan built around you.';
+
+  @override
+  String get onboardingGeneratingStepGoal => 'Matching your goal';
+
+  @override
+  String get onboardingGeneratingStepSchedule => 'Fitting your schedule';
+
+  @override
+  String get onboardingGeneratingStepEquipment =>
+      'Selecting exercises for your gear';
+
+  @override
+  String get onboardingGeneratingStepReady => 'Your plan is ready';
 }

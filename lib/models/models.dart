@@ -83,6 +83,12 @@ class ExerciseItem {
     required this.imageAsset,
     required this.youtubeVideoId,
     this.secondaryMuscles = const [],
+    this.animationPath,
+    this.imageIsFile = false,
+    this.animationIsFile = false,
+    this.bodyPartSlugs = const [],
+    this.primaryMuscleSlug,
+    this.equipmentSlug,
   });
 
   final String id;
@@ -96,6 +102,12 @@ class ExerciseItem {
   final String imageAsset;
   final String youtubeVideoId;
   final List<LocalizedString> secondaryMuscles;
+  final String? animationPath;
+  final bool imageIsFile;
+  final bool animationIsFile;
+  final List<String> bodyPartSlugs;
+  final String? primaryMuscleSlug;
+  final String? equipmentSlug;
 }
 
 class WorkoutExercise {
@@ -315,6 +327,30 @@ class ChallengeInfo {
   final LocalizedString typeLabel;
 }
 
+class TrainerCertification {
+  const TrainerCertification({
+    required this.name,
+    required this.issuer,
+    this.year,
+  });
+
+  final String name;
+  final String issuer;
+  final int? year;
+}
+
+class TrainerTestimonial {
+  const TrainerTestimonial({
+    required this.author,
+    required this.text,
+    required this.rating,
+  });
+
+  final String author;
+  final LocalizedString text;
+  final double rating;
+}
+
 class TrainerProfile {
   const TrainerProfile({
     required this.id,
@@ -326,7 +362,12 @@ class TrainerProfile {
     required this.pricePerSessionEtb,
     required this.availability,
     required this.bio,
+    required this.location,
+    required this.offersInPerson,
+    required this.offersOnline,
     required this.programs,
+    required this.certifications,
+    required this.testimonials,
   });
 
   final String id;
@@ -338,7 +379,12 @@ class TrainerProfile {
   final int pricePerSessionEtb;
   final LocalizedString availability;
   final LocalizedString bio;
+  final LocalizedString location;
+  final bool offersInPerson;
+  final bool offersOnline;
   final List<LocalizedString> programs;
+  final List<TrainerCertification> certifications;
+  final List<TrainerTestimonial> testimonials;
 }
 
 class FitnessEvent {

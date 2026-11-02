@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../data/exercise_repository.dart';
 import '../../data/mock_data.dart';
 import '../../data/user_preferences.dart';
 import '../../l10n/l10n_ext.dart';
@@ -20,13 +21,10 @@ class ExploreScreen extends StatelessWidget {
           '/challenges'
         ),
         (Icons.groups_rounded, l10n.categoryCommunities, '/community'),
-        (Icons.storefront_rounded, l10n.categoryShop, '/shop'),
-      ];
-
-  List<(IconData, String, String)> _laterCategories(AppLocalizations l10n) => [
-        (Icons.fitness_center_rounded, l10n.categoryGyms, '/gyms'),
-        (Icons.verified_user_rounded, l10n.categoryTrainers, '/trainers'),
+        (Icons.person_search_rounded, l10n.categoryTrainers, '/trainers'),
+        (Icons.location_city_rounded, l10n.categoryGyms, '/gyms'),
         (Icons.event_rounded, l10n.categoryEvents, '/events'),
+        (Icons.storefront_rounded, l10n.categoryShop, '/shop'),
       ];
 
   @override
@@ -34,13 +32,16 @@ class ExploreScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = context.l10n;
     final envs = UserPreferences.instance.environments;
+    final catalog = ExerciseRepository.instance;
     final popularExercises =
-        MockData.exercisesForEnvironments(envs).take(6).toList();
+        catalog.exercisesForEnvironments(envs).take(6).toList();
     final recommended = MockData.workoutsForEnvironments(envs);
 
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
+        child: RefreshIndicator(
+          onRefresh: () => catalog.syncIfOnline(force: true),
+          child: CustomScrollView(
           slivers: [
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -118,6 +119,7 @@ class ExploreScreen extends StatelessWidget {
                       children: [
                         ExerciseImage(
                           assetPath: ex.imageAsset,
+                          isFile: ex.imageIsFile,
                           width: 56,
                           height: 56,
                           borderRadius: 14,
@@ -202,37 +204,9 @@ class ExploreScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(20, 28, 20, 32),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SectionHeader(title: l10n.sectionComingLater),
-                    const SizedBox(height: 8),
-                    Text(
-                      l10n.comingLaterHint,
-                      style: textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 12),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final cat in _laterCategories(l10n))
-                          _ExploreChip(
-                            icon: cat.$1,
-                            label: cat.$2,
-                            muted: true,
-                            onTap: () => context.push(cat.$3),
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 32)),
           ],
+        ),
         ),
       ),
     );
@@ -244,13 +218,11 @@ class _ExploreChip extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
-    this.muted = false,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  final bool muted;
 
   @override
   Widget build(BuildContext context) {
@@ -259,10 +231,10 @@ class _ExploreChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: muted ? AppColors.background : AppColors.surface,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: muted ? AppColors.border : AppColors.accentMuted,
+            color: AppColors.accentMuted,
           ),
         ),
         child: Row(
@@ -271,15 +243,13 @@ class _ExploreChip extends StatelessWidget {
             Icon(
               icon,
               size: 18,
-              color: muted ? AppColors.textMuted : AppColors.accent,
+              color: AppColors.accent,
             ),
             const SizedBox(width: 8),
             Text(
               label,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: muted
-                        ? AppColors.textMuted
-                        : AppColors.textSecondary,
+                    color: AppColors.textSecondary,
                   ),
             ),
           ],

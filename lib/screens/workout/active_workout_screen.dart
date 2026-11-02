@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../data/active_workout_controller.dart';
+import '../../data/app_store.dart';
 import '../../data/exercise_illustrations.dart';
 import '../../data/exercise_preferences.dart';
+import '../../data/exercise_repository.dart';
 import '../../data/mock_data.dart';
 import '../../l10n/l10n_ext.dart';
 import '../../l10n/localized_string.dart';
 import '../../models/models.dart';
 import '../../theme/app_colors.dart';
+import '../../widgets/exercise_fullscreen_viewer.dart';
 import '../../widgets/exercise_image.dart';
 import '../../widgets/exercise_illustration_video.dart';
 import '../../widgets/exercise_youtube_player.dart';
@@ -26,40 +30,98 @@ class ActiveWorkoutScreen extends StatefulWidget {
 
 class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
   late final workout =
-      MockData.workoutById(widget.workoutId) ?? MockData.todaysWorkout;
+      AppStore.instance.workoutPlanById(widget.workoutId) ??
+          MockData.todaysWorkout;
   int exerciseIndex = 0;
   int setIndex = 0;
   late double weight;
   late int reps;
   bool setJustCompleted = false;
 
+  ActiveWorkoutController get _session => ActiveWorkoutController.instance;
+
+  List<WorkoutExercise> get _sessionExercises {
+    final base = workout.exercises;
+    final seen = {for (final e in base) e.exercise.id};
+    final extras = <WorkoutExercise>[];
+    for (final id in _session.queuedExerciseIds) {
+      if (seen.contains(id)) continue;
+      final item = ExerciseRepository.instance.exerciseById(id);
+      if (item == null) continue;
+      extras.add(
+        WorkoutExercise(
+          exercise: item,
+          sets: 3,
+          reps: 10,
+          weightKg: 20,
+        ),
+      );
+      seen.add(id);
+    }
+    return [...base, ...extras];
+  }
+
   @override
   void initState() {
     super.initState();
-    ExercisePreferences.clearSessionSkips();
-    final first = workout.exercises.first;
-    weight = first.weightKg;
-    reps = first.reps;
+    final exercises = _sessionExercises;
+    if (exercises.isEmpty) {
+      weight = 0;
+      reps = 0;
+      return;
+    }
+    final first = exercises.first;
+    if (_session.isSessionFor(workout.id)) {
+      exerciseIndex = _session.exerciseIndex.clamp(0, exercises.length - 1);
+      final current = exercises[exerciseIndex];
+      setIndex = _session.setIndex.clamp(0, current.sets - 1);
+      weight = _session.weight;
+      reps = _session.reps;
+    } else {
+      ExercisePreferences.clearSessionSkips();
+      weight = first.weightKg;
+      reps = first.reps;
+      _session.start(
+        workoutId: workout.id,
+        weight: weight,
+        reps: reps,
+      );
+    }
+  }
+
+  void _syncSession() {
+    _session.sync(
+      exerciseIndex: exerciseIndex,
+      setIndex: setIndex,
+      weight: weight,
+      reps: reps,
+    );
+  }
+
+  void _finishWorkout() {
+    _session.clear();
+    context.go('/workout/${workout.id}/complete');
   }
 
   String get _currentExerciseId =>
-      workout.exercises[exerciseIndex].exercise.id;
+      _sessionExercises[exerciseIndex].exercise.id;
 
   void _loadExercise(int index) {
-    final exercise = workout.exercises[index];
+    final exercise = _sessionExercises[index];
     exerciseIndex = index;
     setIndex = 0;
     weight = exercise.weightKg;
     reps = exercise.reps;
     setJustCompleted = false;
+    _syncSession();
   }
 
   void _advanceExercise() {
-    if (exerciseIndex + 1 < workout.exercises.length) {
+    if (exerciseIndex + 1 < _sessionExercises.length) {
       setState(() => _loadExercise(exerciseIndex + 1));
       return;
     }
-    context.go('/workout/${workout.id}/complete');
+    _finishWorkout();
   }
 
   void _skipExercise() {
@@ -70,15 +132,19 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
 
   void _completeSet() {
     HapticFeedback.mediumImpact();
+    _session.recordCompletedSetWeight(weight);
     setState(() => setJustCompleted = true);
 
     Future<void>.delayed(const Duration(milliseconds: 450), () {
       if (!mounted) return;
       setState(() => setJustCompleted = false);
 
-      final current = workout.exercises[exerciseIndex];
+      final current = _sessionExercises[exerciseIndex];
       if (setIndex + 1 < current.sets) {
-        setState(() => setIndex++);
+        setState(() {
+          setIndex++;
+          _syncSession();
+        });
         return;
       }
       _advanceExercise();
@@ -110,7 +176,10 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
       decimal: true,
     );
     if (next == null || !mounted) return;
-    setState(() => weight = next.clamp(0, 500));
+    setState(() {
+      weight = next.clamp(0.5, 500);
+      _syncSession();
+    });
   }
 
   Future<void> _editReps() async {
@@ -121,7 +190,10 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
       decimal: false,
     );
     if (next == null || !mounted) return;
-    setState(() => reps = next.round().clamp(1, 100));
+    setState(() {
+      reps = next.round().clamp(1, 100);
+      _syncSession();
+    });
   }
 
   Future<double?> _promptNumber({
@@ -141,26 +213,46 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final current = workout.exercises[exerciseIndex];
-    final textTheme = Theme.of(context).textTheme;
-    final l10n = context.l10n;
-    final previousWeight =
-        (current.weightKg - 5).clamp(0, current.weightKg).toDouble();
-    final previousReps = (current.reps - 1).clamp(1, current.reps);
+    return ListenableBuilder(
+      listenable: _session,
+      builder: (context, _) {
+        final exercises = _sessionExercises;
+        if (exercises.isEmpty) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: const Center(child: Text('No exercises in this workout')),
+          );
+        }
+        final safeIndex = exerciseIndex.clamp(0, exercises.length - 1);
+        if (safeIndex != exerciseIndex) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) return;
+            setState(() => _loadExercise(safeIndex));
+          });
+        }
+        final current = exercises[safeIndex];
+        final textTheme = Theme.of(context).textTheme;
+        final l10n = context.l10n;
+        final previousWeight =
+            (current.weightKg - 5).clamp(0, current.weightKg).toDouble();
+        final previousReps = (current.reps - 1).clamp(1, current.reps);
 
-    return Scaffold(
+        return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.close_rounded),
-          onPressed: () => context.pop(),
+          icon: const Icon(Icons.keyboard_arrow_down_rounded),
+          onPressed: () {
+            _syncSession();
+            context.pop();
+          },
         ),
         title: Text(
-          l10n.exerciseProgress(exerciseIndex + 1, workout.exercises.length),
+          l10n.exerciseProgress(safeIndex + 1, exercises.length),
           style: textTheme.titleMedium,
         ),
         actions: [
           TextButton(
-            onPressed: () => context.go('/workout/${workout.id}/complete'),
+            onPressed: _finishWorkout,
             child: Text(l10n.finish),
           ),
         ],
@@ -175,16 +267,51 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8),
-                      ExerciseIllustrationVideo(
-                        assetPath: ExerciseIllustrations.forExercise(
-                          current.exercise.id,
-                          current.exercise.muscle.en,
-                        ),
-                        fallbackImageAsset: current.exercise.imageAsset,
-                        width: 200,
-                        height: 148,
-                        borderRadius: 20,
-                        onTap: () => _showHowTo(current.exercise),
+                      Stack(
+                        children: [
+                          ExerciseIllustrationVideo(
+                            assetPath: current.exercise.animationPath ??
+                                ExerciseIllustrations.forExercise(
+                                  current.exercise.id,
+                                  current.exercise.muscle.en,
+                                ),
+                            isFile: current.exercise.animationIsFile,
+                            fallbackImageAsset: current.exercise.imageAsset,
+                            fallbackIsFile: current.exercise.imageIsFile,
+                            width: 200,
+                            height: 148,
+                            borderRadius: 20,
+                            onTap: () => _showHowTo(current.exercise),
+                          ),
+                          Positioned(
+                            right: 6,
+                            bottom: 6,
+                            child: GestureDetector(
+                              onTap: () => ExerciseFullscreenViewer.show(
+                                context,
+                                path: current.exercise.animationPath ??
+                                    current.exercise.imageAsset,
+                                isFile:
+                                    current.exercise.animationPath != null
+                                        ? current.exercise.animationIsFile
+                                        : current.exercise.imageIsFile,
+                              ),
+                              child: Container(
+                                width: 32,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.45),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.fullscreen_rounded,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 8),
                       TextButton.icon(
@@ -241,10 +368,12 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                                     ),
                                     chevronSide: _ChevronSide.left,
                                     onDecrement: () => setState(() {
-                                      weight = (weight - 2.5).clamp(0, 500);
+                                      weight = (weight - 2.5).clamp(0.5, 500);
+                                      _syncSession();
                                     }),
                                     onIncrement: () => setState(() {
-                                      weight = (weight + 2.5).clamp(0, 500);
+                                      weight = (weight + 2.5).clamp(0.5, 500);
+                                      _syncSession();
                                     }),
                                     onEdit: _editWeight,
                                   ),
@@ -266,9 +395,11 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                                     chevronSide: _ChevronSide.right,
                                     onDecrement: () => setState(() {
                                       reps = (reps - 1).clamp(1, 100);
+                                      _syncSession();
                                     }),
                                     onIncrement: () => setState(() {
                                       reps = (reps + 1).clamp(1, 100);
+                                      _syncSession();
                                     }),
                                     onEdit: _editReps,
                                   ),
@@ -307,6 +438,8 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
           ),
         ),
       ),
+    );
+      },
     );
   }
 }
@@ -524,11 +657,21 @@ class _ExerciseHowToSheet extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             child: AspectRatio(
               aspectRatio: 16 / 10,
-              child: ExerciseImage(
-                assetPath: exercise.imageAsset,
-                width: double.infinity,
-                height: double.infinity,
-                borderRadius: 0,
+              child: GestureDetector(
+                onTap: () => ExerciseFullscreenViewer.show(
+                  context,
+                  path: exercise.animationPath ?? exercise.imageAsset,
+                  isFile: exercise.animationPath != null
+                      ? exercise.animationIsFile
+                      : exercise.imageIsFile,
+                ),
+                child: ExerciseImage(
+                  assetPath: exercise.imageAsset,
+                  isFile: exercise.imageIsFile,
+                  width: double.infinity,
+                  height: double.infinity,
+                  borderRadius: 0,
+                ),
               ),
             ),
           ),
@@ -543,12 +686,14 @@ class _ExerciseHowToSheet extends StatelessWidget {
             style: textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
-          Text(l10n.commonMistakesTitle, style: textTheme.titleMedium),
-          const SizedBox(height: 8),
-          Text(
-            context.l10nStr(exercise.commonMistakes),
-            style: textTheme.bodyMedium,
-          ),
+          if (context.l10nStr(exercise.commonMistakes).isNotEmpty) ...[
+            Text(l10n.commonMistakesTitle, style: textTheme.titleMedium),
+            const SizedBox(height: 8),
+            Text(
+              context.l10nStr(exercise.commonMistakes),
+              style: textTheme.bodyMedium,
+            ),
+          ],
           const SizedBox(height: 24),
           PgButton(
             label: l10n.viewDetails,

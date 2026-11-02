@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data/mock_data.dart';
+import '../data/user_preferences.dart';
 import '../l10n/l10n_ext.dart';
 import '../models/models.dart';
 
@@ -16,7 +17,7 @@ IconData shopProductIcon(ShopProductKind kind) {
 String shopProductHeadline(AppLocalizations l10n, ShopProduct product) {
   return switch (product.kind) {
     ShopProductKind.protein =>
-      l10n.shopHeadlineProtein(MockData.currentUser),
+      l10n.shopHeadlineProtein(UserPreferences.instance.resolvedDisplayName),
     ShopProductKind.homeKit => l10n.shopHeadlineNoEquipment,
     ShopProductKind.accessory =>
       l10n.shopHeadlineDelivery(MockData.deliveryArea),

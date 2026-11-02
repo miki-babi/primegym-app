@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../data/mock_data.dart';
+import '../../data/exercise_repository.dart';
 import '../../l10n/l10n_ext.dart';
 import '../../l10n/localized_string.dart';
 import '../../theme/app_colors.dart';
+import '../../widgets/add_to_workout_sheet.dart';
+import '../../widgets/exercise_fullscreen_viewer.dart';
 import '../../widgets/exercise_image.dart';
 import '../../widgets/exercise_youtube_player.dart';
 import '../../widgets/pg_button.dart';
@@ -20,7 +21,6 @@ class ExerciseDetailScreen extends StatefulWidget {
 }
 
 class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
-  bool _favoritePressed = false;
   bool _sheetVisible = false;
 
   @override
@@ -30,17 +30,6 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       if (!mounted) return;
       setState(() => _sheetVisible = true);
     });
-  }
-
-  void _onFavorite() {
-    HapticFeedback.selectionClick();
-    setState(() => _favoritePressed = true);
-    Future<void>.delayed(const Duration(milliseconds: 160), () {
-      if (mounted) setState(() => _favoritePressed = false);
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(context.l10n.addedToFavoritesDemo)),
-    );
   }
 
   List<String> _splitCoachLines(String text) {
@@ -66,7 +55,15 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ex = MockData.exerciseById(widget.exerciseId) ?? MockData.exercises.first;
+    final catalog = ExerciseRepository.instance;
+    final ex = catalog.exerciseById(widget.exerciseId) ??
+        (catalog.exercises.isNotEmpty ? catalog.exercises.first : null);
+    if (ex == null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: const Center(child: Text('Exercise not found')),
+      );
+    }
     final textTheme = Theme.of(context).textTheme;
     final l10n = context.l10n;
     final topPad = MediaQuery.paddingOf(context).top;
@@ -86,10 +83,25 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                     fit: StackFit.expand,
                     children: [
                       Positioned.fill(
-                        child: ExerciseImage(
-                          assetPath: ex.imageAsset,
-                          borderRadius: 0,
-                          height: 280 + topPad,
+                        child: GestureDetector(
+                          onTap: (ex.animationPath != null ||
+                                  ex.imageIsFile ||
+                                  ex.imageAsset.startsWith('http'))
+                              ? () => ExerciseFullscreenViewer.show(
+                                    context,
+                                    path:
+                                        ex.animationPath ?? ex.imageAsset,
+                                    isFile: ex.animationPath != null
+                                        ? ex.animationIsFile
+                                        : ex.imageIsFile,
+                                  )
+                              : null,
+                          child: ExerciseImage(
+                            assetPath: ex.imageAsset,
+                            isFile: ex.imageIsFile,
+                            borderRadius: 0,
+                            height: 280 + topPad,
+                          ),
                         ),
                       ),
                       Positioned(
@@ -114,23 +126,12 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                         top: topPad + 8,
                         left: 16,
                         right: 16,
-                        child: Row(
-                          children: [
-                            _HeroIconButton(
-                              icon: Icons.arrow_back_rounded,
-                              onTap: () => context.pop(),
-                            ),
-                            const Spacer(),
-                            AnimatedScale(
-                              scale: _favoritePressed ? 1.18 : 1,
-                              duration: const Duration(milliseconds: 160),
-                              curve: Curves.easeOutBack,
-                              child: _HeroIconButton(
-                                icon: Icons.favorite_border_rounded,
-                                onTap: _onFavorite,
-                              ),
-                            ),
-                          ],
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: _HeroIconButton(
+                            icon: Icons.arrow_back_rounded,
+                            onTap: () => context.pop(),
+                          ),
                         ),
                       ),
                     ],
@@ -183,7 +184,9 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                             _SectionLabel(l10n.instructionsTitle),
                             const SizedBox(height: 12),
                             _CoachCard(
-                              child: instructionSteps.length > 1
+                              child: instructionSteps.isEmpty
+                                  ? const SizedBox.shrink()
+                                  : instructionSteps.length > 1
                                   ? Column(
                                       children: [
                                         for (var i = 0;
@@ -204,27 +207,29 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                                       ),
                                     ),
                             ),
-                            const SizedBox(height: 28),
-                            _SectionLabel(l10n.commonMistakesTitle),
-                            const SizedBox(height: 12),
-                            _MistakesCard(lines: mistakeLines),
-                            const SizedBox(height: 32),
-                            _SectionLabel(l10n.exerciseVideoTitle),
-                            const SizedBox(height: 12),
-                            ExerciseYoutubePlayer(
-                              videoId: ex.youtubeVideoId,
-                              borderRadius: 20,
-                            ),
-                            // Keep clear of the video WebView — platform views
-                            // paint above Flutter siblings when they share space.
+                            if (mistakeLines.isNotEmpty) ...[
+                              const SizedBox(height: 28),
+                              _SectionLabel(l10n.commonMistakesTitle),
+                              const SizedBox(height: 12),
+                              _MistakesCard(lines: mistakeLines),
+                            ],
+                            if (ex.youtubeVideoId.isNotEmpty) ...[
+                              const SizedBox(height: 32),
+                              _SectionLabel(l10n.exerciseVideoTitle),
+                              const SizedBox(height: 12),
+                              ExerciseYoutubePlayer(
+                                videoId: ex.youtubeVideoId,
+                                borderRadius: 20,
+                              ),
+                            ],
                             const SizedBox(height: 28),
                             PgButton(
                               label: l10n.addToWorkout,
                               onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(l10n.addedToWorkoutDemo),
-                                  ),
+                                showAddToWorkoutSheet(
+                                  context,
+                                  exerciseId: ex.id,
+                                  exerciseName: context.l10nStr(ex.name),
                                 );
                               },
                             ),

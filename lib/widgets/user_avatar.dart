@@ -38,8 +38,8 @@ class UserAvatar extends StatelessWidget {
               shape: BoxShape.circle,
               gradient: LinearGradient(
                 colors: [
-                  AppColors.accent.withValues(alpha: 0.85),
-                  const Color(0xFFE07A2F),
+                  AppColors.accentLight,
+                  AppColors.accent,
                 ],
               ),
             ),
@@ -47,7 +47,7 @@ class UserAvatar extends StatelessWidget {
             child: Text(
               initials,
               style: TextStyle(
-                color: const Color(0xFF1A1200),
+                color: AppColors.onAccent,
                 fontWeight: FontWeight.w700,
                 fontSize: size * 0.34,
               ),

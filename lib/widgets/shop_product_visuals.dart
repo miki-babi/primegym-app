@@ -99,7 +99,7 @@ class ShopProductHeroCard extends StatelessWidget {
                                 product.discountPercent,
                               ),
                               background: AppColors.accent,
-                              foreground: const Color(0xFF1A1200),
+                              foreground: AppColors.onAccent,
                             ),
                           if (product.hasDiscount) const SizedBox(width: 6),
                           if (featured)
@@ -255,7 +255,7 @@ class ShopProductImageRow extends StatelessWidget {
                   child: _ShopPill(
                     label: l10n.shopDiscountPercent(product.discountPercent),
                     background: AppColors.accent,
-                    foreground: const Color(0xFF1A1200),
+                    foreground: AppColors.onAccent,
                     compact: true,
                   ),
                 ),

@@ -5,7 +5,7 @@ import 'app_colors.dart';
 import 'app_typography.dart';
 
 abstract final class AppTheme {
-  static ThemeData dark({Locale? locale}) {
+  static ThemeData light({Locale? locale}) {
     final textTheme = AppTypography.textTheme();
     return ThemeData(
       useMaterial3: true,
@@ -14,19 +14,25 @@ abstract final class AppTheme {
       colorScheme: const ColorScheme.dark(
         surface: AppColors.surface,
         primary: AppColors.accent,
-        onPrimary: Color(0xFF1A1200),
-        secondary: AppColors.accent,
+        onPrimary: AppColors.onAccent,
+        secondary: AppColors.accentSupport,
+        onSecondary: AppColors.onAccent,
         onSurface: AppColors.textPrimary,
         outline: AppColors.border,
       ),
-      textTheme: textTheme,
+      textTheme: textTheme.apply(
+        bodyColor: AppColors.textPrimary,
+        displayColor: AppColors.textPrimary,
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        titleTextStyle: textTheme.titleLarge,
+        titleTextStyle: textTheme.titleLarge?.copyWith(
+          color: AppColors.textPrimary,
+        ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
       ),
       cardTheme: CardThemeData(
@@ -37,6 +43,14 @@ abstract final class AppTheme {
           side: const BorderSide(color: AppColors.border, width: 1),
         ),
         margin: EdgeInsets.zero,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.surface,
+        modalBackgroundColor: AppColors.surface,
+      ),
+      navigationBarTheme: const NavigationBarThemeData(
+        backgroundColor: AppColors.background,
+        indicatorColor: AppColors.accentSoft,
       ),
       dividerTheme: const DividerThemeData(
         color: AppColors.border,
@@ -71,4 +85,7 @@ abstract final class AppTheme {
       ),
     );
   }
+
+  /// Kept for call-site compatibility; forwards to the light theme.
+  static ThemeData dark({Locale? locale}) => light(locale: locale);
 }

@@ -142,6 +142,18 @@ abstract class AppLocalizations {
   /// **'Continue'**
   String get onboardingContinue;
 
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
+
   /// No description provided for @onboardingEnterHome.
   ///
   /// In en, this message translates to:
@@ -1024,10 +1036,22 @@ abstract class AppLocalizations {
   /// **'Programs'**
   String get sectionPrograms;
 
+  /// No description provided for @sectionCertifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Certifications'**
+  String get sectionCertifications;
+
+  /// No description provided for @sectionTestimonials.
+  ///
+  /// In en, this message translates to:
+  /// **'Testimonials'**
+  String get sectionTestimonials;
+
   /// No description provided for @bookDemo.
   ///
   /// In en, this message translates to:
-  /// **'Book (demo)'**
+  /// **'Book'**
   String get bookDemo;
 
   /// No description provided for @bookingDemoOnly.
@@ -1090,6 +1114,36 @@ abstract class AppLocalizations {
   /// **'No challenges in this filter'**
   String get noChallengesInFilter;
 
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @filterInPerson.
+  ///
+  /// In en, this message translates to:
+  /// **'In-person'**
+  String get filterInPerson;
+
+  /// No description provided for @filterOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get filterOnline;
+
+  /// No description provided for @filterAllLocations.
+  ///
+  /// In en, this message translates to:
+  /// **'All locations'**
+  String get filterAllLocations;
+
+  /// No description provided for @noTrainersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No trainers match this filter'**
+  String get noTrainersFound;
+
   /// No description provided for @challengeProgressMeta.
   ///
   /// In en, this message translates to:
@@ -1148,6 +1202,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Added to workout (demo)'**
   String get addedToWorkoutDemo;
+
+  /// No description provided for @addToWorkoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to workout'**
+  String get addToWorkoutTitle;
+
+  /// No description provided for @addToActiveWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Active workout'**
+  String get addToActiveWorkout;
+
+  /// No description provided for @addToActiveWorkoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Current session · {name}'**
+  String addToActiveWorkoutSubtitle(String name);
+
+  /// No description provided for @addToSavedWorkouts.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved workouts'**
+  String get addToSavedWorkouts;
+
+  /// No description provided for @addToWorkoutEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No active session or saved workouts yet. Start or save a workout first.'**
+  String get addToWorkoutEmpty;
+
+  /// No description provided for @addedToNamedWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to {name}'**
+  String addedToNamedWorkout(String name);
+
+  /// No description provided for @newCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'New collection'**
+  String get newCollection;
+
+  /// No description provided for @newCollectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a workout to add this to'**
+  String get newCollectionSubtitle;
+
+  /// No description provided for @collectionNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection name'**
+  String get collectionNameHint;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
 
   /// No description provided for @gymsNearYou.
   ///
@@ -1389,10 +1503,16 @@ abstract class AppLocalizations {
   /// **'Finish'**
   String get finish;
 
+  /// No description provided for @resumeWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resumeWorkout;
+
   /// No description provided for @skipExercise.
   ///
   /// In en, this message translates to:
-  /// **'Skip exercise'**
+  /// **'Skip'**
   String get skipExercise;
 
   /// No description provided for @whyDidYouSkip.
@@ -1532,6 +1652,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shared to community (demo)'**
   String get sharedToCommunityDemo;
+
+  /// No description provided for @shareWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Share workout'**
+  String get shareWorkout;
+
+  /// No description provided for @changeBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Change background'**
+  String get changeBackground;
+
+  /// No description provided for @sharing.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing…'**
+  String get sharing;
+
+  /// No description provided for @shareStatDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get shareStatDuration;
+
+  /// No description provided for @shareStatExercises.
+  ///
+  /// In en, this message translates to:
+  /// **'Exercises'**
+  String get shareStatExercises;
+
+  /// No description provided for @shareStatSets.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets'**
+  String get shareStatSets;
+
+  /// No description provided for @shareStatVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get shareStatVolume;
+
+  /// No description provided for @shareStatDurationValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String shareStatDurationValue(int minutes);
+
+  /// No description provided for @shareStatVolumeValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{kg} kg'**
+  String shareStatVolumeValue(String kg);
 
   /// No description provided for @wizardSwipeBackHint.
   ///
@@ -2360,6 +2534,552 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Personalized for you'**
   String get onboardingPlanReadyBadge;
+
+  /// No description provided for @onboardingOffersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What PrimeGym offers'**
+  String get onboardingOffersTitle;
+
+  /// No description provided for @onboardingOffersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything you need to train with purpose.'**
+  String get onboardingOffersSubtitle;
+
+  /// No description provided for @onboardingOffersTrainingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom workouts matched to your goals, schedule, and gear.'**
+  String get onboardingOffersTrainingBody;
+
+  /// No description provided for @onboardingNameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your name?'**
+  String get onboardingNameTitle;
+
+  /// No description provided for @onboardingNameSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll use this to personalize your experience.'**
+  String get onboardingNameSubtitle;
+
+  /// No description provided for @onboardingNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get onboardingNameHint;
+
+  /// No description provided for @onboardingGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What are your goals?'**
+  String get onboardingGoalTitle;
+
+  /// No description provided for @onboardingGoalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all that apply — you can pick more than one.'**
+  String get onboardingGoalSubtitle;
+
+  /// No description provided for @goalStrength.
+  ///
+  /// In en, this message translates to:
+  /// **'Strength'**
+  String get goalStrength;
+
+  /// No description provided for @goalWeightLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight loss'**
+  String get goalWeightLoss;
+
+  /// No description provided for @goalMuscleGain.
+  ///
+  /// In en, this message translates to:
+  /// **'Muscle gain'**
+  String get goalMuscleGain;
+
+  /// No description provided for @onboardingFrequencyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How often do you train?'**
+  String get onboardingFrequencyTitle;
+
+  /// No description provided for @onboardingFrequencySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Be honest — we\'ll build a plan you can stick to.'**
+  String get onboardingFrequencySubtitle;
+
+  /// No description provided for @frequencyOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'Once a week'**
+  String get frequencyOnce;
+
+  /// No description provided for @frequencyTwice.
+  ///
+  /// In en, this message translates to:
+  /// **'2 times a week'**
+  String get frequencyTwice;
+
+  /// No description provided for @frequencyThree.
+  ///
+  /// In en, this message translates to:
+  /// **'3 times a week'**
+  String get frequencyThree;
+
+  /// No description provided for @frequencyFour.
+  ///
+  /// In en, this message translates to:
+  /// **'4 times a week'**
+  String get frequencyFour;
+
+  /// No description provided for @frequencyFive.
+  ///
+  /// In en, this message translates to:
+  /// **'5 times a week'**
+  String get frequencyFive;
+
+  /// No description provided for @frequencySix.
+  ///
+  /// In en, this message translates to:
+  /// **'6 times a week'**
+  String get frequencySix;
+
+  /// No description provided for @frequencyEveryday.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyday'**
+  String get frequencyEveryday;
+
+  /// No description provided for @onboardingExperienceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your experience?'**
+  String get onboardingExperienceTitle;
+
+  /// No description provided for @onboardingExperienceSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This helps us set the right intensity.'**
+  String get onboardingExperienceSubtitle;
+
+  /// No description provided for @onboardingLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where do you train?'**
+  String get onboardingLocationTitle;
+
+  /// No description provided for @onboardingLocationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll tailor sessions to your space.'**
+  String get onboardingLocationSubtitle;
+
+  /// No description provided for @locationOutdoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor'**
+  String get locationOutdoor;
+
+  /// No description provided for @locationOutdoorDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Parks, streets, or open air — bodyweight-friendly training.'**
+  String get locationOutdoorDetail;
+
+  /// No description provided for @onboardingEquipmentSelectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What equipment do you have?'**
+  String get onboardingEquipmentSelectTitle;
+
+  /// No description provided for @onboardingEquipmentSelectSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select everything you can use — you can change this later.'**
+  String get onboardingEquipmentSelectSubtitle;
+
+  /// No description provided for @onboardingEquipmentSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String onboardingEquipmentSelectedCount(int count);
+
+  /// No description provided for @equipmentCategoryFreeWeights.
+  ///
+  /// In en, this message translates to:
+  /// **'Free weights & resistance'**
+  String get equipmentCategoryFreeWeights;
+
+  /// No description provided for @equipmentCategoryStructures.
+  ///
+  /// In en, this message translates to:
+  /// **'Gym structures & benches'**
+  String get equipmentCategoryStructures;
+
+  /// No description provided for @equipmentCategoryFunctional.
+  ///
+  /// In en, this message translates to:
+  /// **'Functional & bodyweight tools'**
+  String get equipmentCategoryFunctional;
+
+  /// No description provided for @equipmentCategoryCardio.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio equipment'**
+  String get equipmentCategoryCardio;
+
+  /// No description provided for @equipmentCategoryCoreRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'Core & recovery accessories'**
+  String get equipmentCategoryCoreRecovery;
+
+  /// No description provided for @equipmentResistanceBands.
+  ///
+  /// In en, this message translates to:
+  /// **'Resistance bands'**
+  String get equipmentResistanceBands;
+
+  /// No description provided for @equipmentMachines.
+  ///
+  /// In en, this message translates to:
+  /// **'Machines'**
+  String get equipmentMachines;
+
+  /// No description provided for @equipmentKettlebells.
+  ///
+  /// In en, this message translates to:
+  /// **'Kettlebells'**
+  String get equipmentKettlebells;
+
+  /// No description provided for @equipmentEzCurlBar.
+  ///
+  /// In en, this message translates to:
+  /// **'EZ curl / specialty bars'**
+  String get equipmentEzCurlBar;
+
+  /// No description provided for @equipmentWeightBench.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight bench'**
+  String get equipmentWeightBench;
+
+  /// No description provided for @equipmentSquatRack.
+  ///
+  /// In en, this message translates to:
+  /// **'Squat rack / power cage'**
+  String get equipmentSquatRack;
+
+  /// No description provided for @equipmentPullUpBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Pull-up bar / dip station'**
+  String get equipmentPullUpBar;
+
+  /// No description provided for @equipmentCableMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Cable machine'**
+  String get equipmentCableMachine;
+
+  /// No description provided for @equipmentSmithMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Smith machine'**
+  String get equipmentSmithMachine;
+
+  /// No description provided for @equipmentTrx.
+  ///
+  /// In en, this message translates to:
+  /// **'TRX / suspension trainer'**
+  String get equipmentTrx;
+
+  /// No description provided for @equipmentGymnasticRings.
+  ///
+  /// In en, this message translates to:
+  /// **'Gymnastic rings'**
+  String get equipmentGymnasticRings;
+
+  /// No description provided for @equipmentWeightVest.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight vest / ankle weights'**
+  String get equipmentWeightVest;
+
+  /// No description provided for @equipmentPlyoBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Plyo box'**
+  String get equipmentPlyoBox;
+
+  /// No description provided for @equipmentMedicineBall.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine / slam balls'**
+  String get equipmentMedicineBall;
+
+  /// No description provided for @equipmentSandbag.
+  ///
+  /// In en, this message translates to:
+  /// **'Sandbag'**
+  String get equipmentSandbag;
+
+  /// No description provided for @equipmentTreadmill.
+  ///
+  /// In en, this message translates to:
+  /// **'Treadmill'**
+  String get equipmentTreadmill;
+
+  /// No description provided for @equipmentBike.
+  ///
+  /// In en, this message translates to:
+  /// **'Stationary / air / spin bike'**
+  String get equipmentBike;
+
+  /// No description provided for @equipmentRowingMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Rowing machine'**
+  String get equipmentRowingMachine;
+
+  /// No description provided for @equipmentSkiErg.
+  ///
+  /// In en, this message translates to:
+  /// **'SkiErg'**
+  String get equipmentSkiErg;
+
+  /// No description provided for @equipmentStairmaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Stairmaster'**
+  String get equipmentStairmaster;
+
+  /// No description provided for @equipmentJumpRope.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump rope'**
+  String get equipmentJumpRope;
+
+  /// No description provided for @equipmentAbWheel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ab wheel / core sliders'**
+  String get equipmentAbWheel;
+
+  /// No description provided for @equipmentFoamRoller.
+  ///
+  /// In en, this message translates to:
+  /// **'Foam roller / mobility tools'**
+  String get equipmentFoamRoller;
+
+  /// No description provided for @equipmentYogaMat.
+  ///
+  /// In en, this message translates to:
+  /// **'Yoga / exercise mat'**
+  String get equipmentYogaMat;
+
+  /// No description provided for @equipmentUseBodyweight.
+  ///
+  /// In en, this message translates to:
+  /// **'Push-ups, squats, lunges with no gear'**
+  String get equipmentUseBodyweight;
+
+  /// No description provided for @equipmentUseDumbbells.
+  ///
+  /// In en, this message translates to:
+  /// **'Unilateral and isolation lifts'**
+  String get equipmentUseDumbbells;
+
+  /// No description provided for @equipmentUseBarbell.
+  ///
+  /// In en, this message translates to:
+  /// **'Heavy compound lifts'**
+  String get equipmentUseBarbell;
+
+  /// No description provided for @equipmentUseKettlebells.
+  ///
+  /// In en, this message translates to:
+  /// **'Swings, cleans, carries'**
+  String get equipmentUseKettlebells;
+
+  /// No description provided for @equipmentUseResistanceBands.
+  ///
+  /// In en, this message translates to:
+  /// **'Variable resistance, assistance, rehab'**
+  String get equipmentUseResistanceBands;
+
+  /// No description provided for @equipmentUseEzCurlBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Arm work, trap and safety squat bars'**
+  String get equipmentUseEzCurlBar;
+
+  /// No description provided for @equipmentUseWeightBench.
+  ///
+  /// In en, this message translates to:
+  /// **'Pressing and supported lifts'**
+  String get equipmentUseWeightBench;
+
+  /// No description provided for @equipmentUseSquatRack.
+  ///
+  /// In en, this message translates to:
+  /// **'Safe squatting and pressing'**
+  String get equipmentUseSquatRack;
+
+  /// No description provided for @equipmentUsePullUpBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Bodyweight pulling and pushing'**
+  String get equipmentUsePullUpBar;
+
+  /// No description provided for @equipmentUseMachines.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided, joint-friendly strength work'**
+  String get equipmentUseMachines;
+
+  /// No description provided for @equipmentUseCableMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Constant-tension, multi-angle work'**
+  String get equipmentUseCableMachine;
+
+  /// No description provided for @equipmentUseSmithMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Barbell on fixed rails'**
+  String get equipmentUseSmithMachine;
+
+  /// No description provided for @equipmentUseTrx.
+  ///
+  /// In en, this message translates to:
+  /// **'Bodyweight resistance with straps'**
+  String get equipmentUseTrx;
+
+  /// No description provided for @equipmentUseGymnasticRings.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced pulling, pushing, stability'**
+  String get equipmentUseGymnasticRings;
+
+  /// No description provided for @equipmentUseWeightVest.
+  ///
+  /// In en, this message translates to:
+  /// **'Adds load to bodyweight movements'**
+  String get equipmentUseWeightVest;
+
+  /// No description provided for @equipmentUsePlyoBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Jumps and step-ups'**
+  String get equipmentUsePlyoBox;
+
+  /// No description provided for @equipmentUseMedicineBall.
+  ///
+  /// In en, this message translates to:
+  /// **'Throws, slams, rotational power'**
+  String get equipmentUseMedicineBall;
+
+  /// No description provided for @equipmentUseSandbag.
+  ///
+  /// In en, this message translates to:
+  /// **'Carries, lifts, conditioning'**
+  String get equipmentUseSandbag;
+
+  /// No description provided for @equipmentUseTreadmill.
+  ///
+  /// In en, this message translates to:
+  /// **'Walking and running'**
+  String get equipmentUseTreadmill;
+
+  /// No description provided for @equipmentUseBike.
+  ///
+  /// In en, this message translates to:
+  /// **'Low-impact cardio and intervals'**
+  String get equipmentUseBike;
+
+  /// No description provided for @equipmentUseRowingMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Full-body cardio'**
+  String get equipmentUseRowingMachine;
+
+  /// No description provided for @equipmentUseSkiErg.
+  ///
+  /// In en, this message translates to:
+  /// **'Upper-body-led cardio'**
+  String get equipmentUseSkiErg;
+
+  /// No description provided for @equipmentUseStairmaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Stair-climbing cardio'**
+  String get equipmentUseStairmaster;
+
+  /// No description provided for @equipmentUseJumpRope.
+  ///
+  /// In en, this message translates to:
+  /// **'Portable cardio and coordination'**
+  String get equipmentUseJumpRope;
+
+  /// No description provided for @equipmentUseAbWheel.
+  ///
+  /// In en, this message translates to:
+  /// **'Core stability and anti-extension'**
+  String get equipmentUseAbWheel;
+
+  /// No description provided for @equipmentUseFoamRoller.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft-tissue work and recovery'**
+  String get equipmentUseFoamRoller;
+
+  /// No description provided for @equipmentUseYogaMat.
+  ///
+  /// In en, this message translates to:
+  /// **'Floor work and padding'**
+  String get equipmentUseYogaMat;
+
+  /// No description provided for @onboardingGeneratingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating your workout plan'**
+  String get onboardingGeneratingTitle;
+
+  /// No description provided for @onboardingGeneratingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Locking in a plan built around you.'**
+  String get onboardingGeneratingSubtitle;
+
+  /// No description provided for @onboardingGeneratingStepGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Matching your goal'**
+  String get onboardingGeneratingStepGoal;
+
+  /// No description provided for @onboardingGeneratingStepSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Fitting your schedule'**
+  String get onboardingGeneratingStepSchedule;
+
+  /// No description provided for @onboardingGeneratingStepEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Selecting exercises for your gear'**
+  String get onboardingGeneratingStepEquipment;
+
+  /// No description provided for @onboardingGeneratingStepReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Your plan is ready'**
+  String get onboardingGeneratingStepReady;
 }
 
 class _AppLocalizationsDelegate
